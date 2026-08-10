@@ -64,12 +64,17 @@ const SearchInput = props => {
   }
 
   return (
-    <div className={'flex w-full rounded-lg ' + className}>
+    <div
+      className={
+        'flex w-full items-center rounded-lg border border-gray-300 bg-white shadow-sm transition focus-within:border-gray-500 focus-within:shadow-md dark:border-gray-500 dark:bg-gray-700 ' +
+        className
+      }
+    >
       <input
         ref={searchInputRef}
         type="text"
         className={
-          'outline-none w-full text-sm pl-5 rounded-lg transition focus:shadow-lg dark:text-gray-300 font-light leading-10 text-black bg-gray-100 dark:bg-gray-500'
+          'w-full rounded-lg bg-transparent py-2 pl-5 pr-10 text-sm font-light leading-10 text-black outline-none placeholder:text-gray-500 dark:text-gray-100 dark:placeholder:text-gray-300'
         }
         onKeyUp={handleKeyUp}
         onCompositionStart={lockSearchInput}
@@ -81,20 +86,22 @@ const SearchInput = props => {
       />
 
       <div
-        className="-ml-8 cursor-pointer  float-right items-center justify-center py-2"
+        className="-ml-8 cursor-pointer items-center justify-center py-2"
         onClick={handleSearch}
       >
         <i
-          className={`hover:text-black transform duration-200 text-gray-500 dark:text-gray-200 cursor-pointer fas ${
-            onLoading ? 'fa-spinner animate-spin' : 'fa-search'
+          className={`transform cursor-pointer fas duration-200 hover:text-black dark:hover:text-white ${
+            onLoading
+              ? 'fa-spinner animate-spin text-gray-500'
+              : 'fa-search text-gray-600 dark:text-gray-200'
           }`}
         />
       </div>
 
       {showClean && (
-        <div className="-ml-12 cursor-pointer float-right items-center justify-center py-2">
+        <div className="-ml-12 cursor-pointer items-center justify-center py-2">
           <i
-            className="hover:text-black transform duration-200 text-gray-400 dark:text-gray-300 cursor-pointer fas fa-times"
+            className="fas fa-times cursor-pointer text-gray-500 transform duration-200 hover:text-black dark:text-gray-300 dark:hover:text-white"
             onClick={cleanSearch}
           />
         </div>
