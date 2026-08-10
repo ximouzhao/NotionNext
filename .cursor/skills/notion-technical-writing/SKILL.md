@@ -1,6 +1,6 @@
 ---
 name: notion-technical-writing
-description: Writes and revises clear, rigorous technical blog posts and Notion drafts for this NotionNext project. Use when the user asks to write, edit, review, structure, or publish a tutorial, technical article, blog post, or Notion draft.
+description: Writes and revises clear, rigorous technical blog posts and Notion drafts for this NotionNext project. Use when the user asks to write, edit, review, structure, or publish a tutorial, technical article, blog post, Notion draft, or article cover image.
 ---
 
 # Notion Technical Writing
@@ -30,12 +30,13 @@ Use this sequence unless the subject needs a materially different one:
 6. A practical checklist and short causal summary
 7. Sources and deeper reading
 
-Keep the Notion table of contents narrative:
+Keep the heading outline narrative (NotionNext builds the site TOC from these headings):
 
 - Use no more than 6–8 top-level headings.
 - Use level-2 headings only for detail under the immediately preceding main question.
 - Do not make “References”, a code sample, or a minor aside a top-level section.
 - Treat CORS, browser edge cases, and advanced variants as extensions unless they are the main question.
+- Do not place a Notion TOC block or outline image at the top; the site generates progress navigation automatically.
 
 ## Terminology and rigor
 
@@ -64,9 +65,52 @@ Keep the Notion table of contents narrative:
 1. Inspect the destination database schema before writing.
 2. Create new articles as `Post` with `status=Draft` unless the user explicitly requests publication.
 3. Use Notion callouts, headings, short tables, toggles, code blocks, and diagrams to support—not replace—the narrative.
-4. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`.
-5. Link companion pages with the configured public site URL plus slug. Do not use native Notion child pages as the site hierarchy.
-6. After writing, fetch the page to verify properties, heading hierarchy, links, images, and first-use definitions.
+4. **Do not insert a manual table of contents at the top of the article.** NotionNext already generates the in-page progress catalog / TOC from headings. Never add:
+   - a Notion `<table_of_contents/>` block
+   - a pasted screenshot or image of the outline
+   - a hand-written bullet list that only restates upcoming headings
+   Start the body with the opening scenario / callout, then the first real section heading.
+5. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`.
+6. Link companion pages with the public site route `https://blog.ximouzhao.com/article/<slug>` (for example `https://blog.ximouzhao.com/article/cors-and-csrf`). Never use bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
+7. After writing, fetch the page to verify properties, heading hierarchy, links, images, and first-use definitions.
+
+## Article cover images
+
+Generate per-article Notion covers when the user asks. Do not overwrite articles that already have a custom uploaded cover (Notion `attachment:` / custom file covers). Stock Notion gallery covers may be replaced.
+
+### Capability limits
+
+- Notion MCP can upload files and can set `cover` only via an image URL.
+- Do **not** use the workaround of inserting a temp image into the page body, then promoting it to cover. It leaves junk in the article and is unreliable.
+- Deliver generated cover files locally. The user sets the cover in Notion with **Change cover → Upload**.
+
+### Visual style
+
+- Flat vector editorial / technical illustration; one clear left-to-right story matching the article topic.
+- Palette: deep slate navy background (`#0F172A`), teal accents for the “safe / trusted” side, restrained red for threat when needed, optional amber highlight for a key token or focus mark.
+
+### Aspect ratio and composition (validated)
+
+Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut off.
+
+1. Generate at `16:9`, but compose as a **wide banner story**.
+2. Keep the illustration fairly large and centered: leave modest empty navy padding on top and bottom so browser chrome, form tops/bottoms, and panel edges stay fully visible. Do **not** shrink the scene too small; padding is for completeness, not for making a tiny graphic in a sea of empty space.
+3. Lay the narrative **left → right** in one horizontal strip. Do not stack important elements vertically.
+4. Post-process onto a **3:1** canvas (e.g. `2400×800`): fit the full artwork inside the banner with light padding; do **not** hard-crop through UI frames. Prefer filling most of the banner height (about 88–92% of canvas height) while still showing full panel edges.
+5. Approved reference approach: a wide dark canvas with a clearly readable centered scene—not edge-to-edge clipping, and not an over-shrunk miniature.
+
+### Output directory
+
+- Save deliverable covers under `.tmp/covers/` (gitignored).
+- Filename: `cover-<slug-or-short-id>.png` (prefer article `slug` when present).
+- Optionally keep a working source under Cursor assets; the file the user uploads must be the padded **3:1** deliverable in `.tmp/covers/`.
+
+### Workflow checklist
+
+- [ ] Skip pages that already have custom covers.
+- [ ] Match cover metaphor to the article’s concrete scenario.
+- [ ] Verify browser/panel frames are fully visible after the 3:1 fit (no clipped tops/bottoms), without over-shrinking the scene.
+- [ ] Place files in `.tmp/covers/` and tell the user to upload via Notion **Change cover → Upload**.
 
 ## Pre-publication review
 
@@ -75,5 +119,6 @@ Keep the Notion table of contents narrative:
 - [ ] The article answers one question at a time and preserves the scenario.
 - [ ] Each security claim has its conditions and limits.
 - [ ] Website-specific claims are either sourced or explicitly framed as a generic pattern.
-- [ ] The table of contents reads like a story, not an unstructured outline.
-- [ ] Main article and companion links use the intended NotionNext route and status.
+- [ ] Heading hierarchy reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
+- [ ] The page does not begin with `<table_of_contents/>`, a TOC screenshot, or a duplicate outline list.
+- [ ] Main article and companion links use `https://blog.ximouzhao.com/article/<slug>` and the intended NotionNext status.
