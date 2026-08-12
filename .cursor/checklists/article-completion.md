@@ -25,6 +25,15 @@ Do not declare the article workflow complete until every applicable item is sati
 - [ ] Remaining minor and nit findings are recorded with the user's decision.
 - [ ] Review completed within three rounds, or the user chose to continue.
 
+## Narrative and structure
+
+- [ ] The saved page preserves the approved scenario, actors, terminology order, and end-to-end causal chain.
+- [ ] Main headings answer reader questions, and rich blocks support rather than replace the explanation.
+- [ ] Recommended defenses map to named failure conditions and state their limits.
+- [ ] A concise causal conclusion appears before sources or deeper reading.
+- [ ] Companion pages remain locally understandable and do not outsource essential definitions.
+- [ ] Independent review classified readability and structure findings by reader impact.
+
 ## Cover
 
 - [ ] Cover is not required, or a 3:1 asset exists at `public/images/covers/cover-<slug>.png`.

@@ -23,7 +23,10 @@ Given one focused article objective:
    - peer-reviewed research where appropriate.
 5. Separate general standards from one company's implementation.
 6. Record conditions, exceptions, disputed interpretations, publication dates, and source freshness.
-7. Mark unknowns explicitly. Do not invent private APIs, controls, incidents, benchmarks, or behavior.
+7. Record the actors, normal flow, and evidence-backed causal chain needed to explain the mechanism without skipping steps.
+8. When the article recommends defenses or mitigations, pair each one with the failure condition it addresses and the conditions under which it works or fails.
+9. Distinguish definitions essential to the main article from optional depth suitable for a Toggle or companion page.
+10. Mark unknowns explicitly. Do not invent private APIs, controls, incidents, benchmarks, or behavior.
 
 ## Output
 
@@ -47,10 +50,21 @@ Given one focused article objective:
 - Term:
   - Reader-safe definition:
   - Depends on:
+  - Required in: main / toggle / companion
 
 ## Repository Evidence
 
 - path:line — what it proves
+
+## Scenario and Causal Chain
+
+- Actors:
+- Normal flow:
+- Ordered mechanism:
+
+## Defense / Failure Map
+
+- Defense → failure mitigated → conditions and limits, or `Not applicable`:
 
 ## Unknowns and Conflicts
 

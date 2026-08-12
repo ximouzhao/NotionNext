@@ -37,8 +37,9 @@ Use this sequence unless the subject needs a materially different one:
 3. One question per main section, answered with a causal explanation
 4. A minimal, clearly labelled technical example after the reader understands the behavior
 5. Exact conditions, exceptions, and threat-model boundaries
-6. A practical checklist and short causal summary
-7. Sources and deeper reading
+6. Recommended defenses mapped to the failure conditions they address, where applicable
+7. A practical checklist and concise causal summary
+8. Sources and deeper reading outside the top-level narrative
 
 Keep the heading outline narrative (NotionNext builds the site TOC from these headings):
 
@@ -47,6 +48,16 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 - Do not make “References”, a code sample, or a minor aside a top-level section.
 - Treat CORS, browser edge cases, and advanced variants as extensions unless they are the main question.
 - Do not place a Notion TOC block or outline image at the top; the site generates progress navigation automatically.
+
+## Causal narrative and defenses
+
+- Make every main heading answer one reader question rather than merely name a topic.
+- Keep an end-to-end causal chain visible: actor → action or input → mechanism/check → observable result. For browser-security flows, explicitly separate whether the request can be sent, whether credentials can attach, whether the initiating script can read the response, and whether the server accepts the operation.
+- Introduce each term before a later step relies on it. Do not make readers decode jargon while also learning the mechanism.
+- Map every recommended defense to the failure condition it prevents and state the conditions under which it works or fails.
+- Let examples, diagrams, tables, and checklists support the prose explanation; never use a rich block as a substitute for the causal chain.
+- End with a short causal recap after the mechanism and boundaries are clear, then place sources or deeper reading outside the top-level narrative.
+- Companion pages may be intentionally short, but they must define the terms they use. Do not outsource a definition essential to understanding the main article.
 
 ## Terminology and rigor
 
@@ -82,7 +93,7 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
    - a pasted screenshot or image of the outline
    - a hand-written bullet list that only restates upcoming headings
    Start the body with the opening scenario / callout, then the first real section heading.
-7. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`.
+7. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`. A companion may have narrow scope, but it must remain locally understandable and must not own a definition essential to the main article unless the main article already established it.
 8. Link companion pages with the public site route `https://ximouzhao.com/article/<slug>` (for example `https://ximouzhao.com/article/cors-and-csrf`). Never use `https://blog.ximouzhao.com/...` (origin-only host), bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
 9. After writing, fetch the page and run `verify-notion-article`; Notion UI correctness does not prove NotionNext rendering.
 10. Treat `Draft`, `Invisible`, and the site's article password as workflow/UI controls, not confidentiality boundaries. Never store confidential material in this site database.
@@ -133,11 +144,14 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 ## Pre-publication review
 
 - [ ] The first screen explains why the reader should care.
-- [ ] Every acronym and specialized term is defined where it first appears.
+- [ ] Every acronym and specialized term is defined before first reliance, normally where it first appears.
 - [ ] The article answers one question at a time and preserves the scenario.
+- [ ] The actors and complete causal chain remain traceable from the opening through the conclusion.
+- [ ] Each recommended defense maps to a named failure condition and states its limits.
 - [ ] Each security claim has its conditions and limits.
 - [ ] Website-specific claims are either sourced or explicitly framed as a generic pattern.
-- [ ] Heading hierarchy reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
+- [ ] Heading hierarchy is question-driven and reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
+- [ ] A concise causal conclusion appears before sources or deeper reading, which are not top-level narrative sections.
 - [ ] The page does not begin with `<table_of_contents/>`, a TOC screenshot, or a duplicate outline list.
 - [ ] Main article and companion links use `https://ximouzhao.com/article/<slug>` and the intended NotionNext status.
 - [ ] Independent review has no blocker or major findings.

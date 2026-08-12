@@ -11,6 +11,8 @@ The public article is not rendered from repository Markdown. Notion returns a `r
 
 ## Preferred blocks
 
+Rich blocks support the causal narrative; they do not replace prose that identifies the actors, mechanism, checks, results, and relevant defenses.
+
 ### Headings
 
 - Use `#`, `##`, and `###` in narrative order.
@@ -59,6 +61,7 @@ flowchart LR
 
 - Use lowercase `mermaid`.
 - Keep one action per edge and quote labels containing punctuation.
+- For security and other mechanistic flows, preserve the article's causal chain rather than combining distinct decisions into one edge.
 - Do not rely on PlantUML auto-rendering; it remains a normal code block.
 
 ### Equations

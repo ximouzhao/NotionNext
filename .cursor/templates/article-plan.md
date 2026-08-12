@@ -40,6 +40,10 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 
 1. Term — definition — introduced after:
 
+## Causal Chain
+
+1. Actor → action or input → mechanism/check → result:
+
 ## Narrative Outline
 
 1. Heading:
@@ -48,11 +52,24 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
    - Evidence:
    - Notion block:
 
+## Defense / Failure Map
+
+- Defense:
+  - Failure mitigated:
+  - Conditions / limits:
+- Not applicable reason:
+
 ## Main and Companion Boundaries
 
 - Main article owns:
 - Companion pages and slugs:
+- Essential definitions that must not be companion-only:
 - Duplication deliberately retained:
+
+## Conclusion and Sources Placement
+
+- Concise causal recap:
+- Sources / deeper reading placement:
 
 ## Notion Design
 

@@ -41,13 +41,18 @@ Draft is a valid workflow value and is excluded from normal `allPages` discovery
 
 ### Content
 
-- first screen establishes a concrete problem and why it matters;
-- specialized terms and acronyms are defined at first use;
-- headings form a causal narrative with no duplicate manual TOC;
-- code and diagrams are explained;
+- first screen establishes a concrete problem or scenario, identifiable actors, and why it matters;
+- specialized terms and acronyms are defined before first reliance, normally at first use;
+- terms appear in dependency order before later sections rely on them;
+- a complete causal chain is traceable from actors and inputs through mechanisms or checks to observable results, or its absence is justified;
+- headings answer reader questions and form a causal narrative with no duplicate manual TOC;
+- code, diagrams, tables, Toggles, Callouts, and checklists support rather than replace the explanation;
+- recommended defenses map to named failure conditions and state their limits;
 - material claims state conditions and limits;
 - standards and implementation-specific claims are separated;
-- main and companion pages do not depend on distant definitions;
+- a concise causal conclusion appears before sources or deeper reading;
+- sources and deeper reading do not interrupt the top-level narrative;
+- companion pages may be short but remain locally understandable, and the main article does not outsource essential definitions;
 - sources are primary or authoritative and support the associated claims.
 
 ### Blocks

@@ -45,11 +45,16 @@ Design in dependency order:
 
 1. concrete scenario or reader problem;
 2. actors and normal behavior;
-3. one causal question per section;
+3. an end-to-end causal chain, with one reader question per section;
 4. minimal example after the behavior is understandable;
-5. conditions, exceptions, and threat-model boundaries;
-6. practical checklist and causal summary;
-7. sources and deeper reading.
+5. where applicable, defenses mapped to the failure conditions they mitigate;
+6. conditions, exceptions, and threat-model boundaries;
+7. practical checklist and concise causal conclusion;
+8. sources and deeper reading outside the top-level narrative.
+
+For browser-security flows, the default causal chain separates whether a request can be sent, whether credentials may attach, whether the initiating script can read the response, and whether the server accepts or rejects the operation. Adapt the same actor → action/input → mechanism/check → result pattern for other mechanistic topics.
+
+Companion pages may be intentionally short, but every page must define the terms it uses. Keep definitions essential to the main question in the main article rather than outsourcing them to a companion.
 
 Choose Notion blocks deliberately. The plan must state where Callouts, Mermaid, code, tables, Toggles, equations, images, captions, quotes, columns, or checklists improve comprehension. Use only capabilities listed in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`.
 

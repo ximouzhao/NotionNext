@@ -22,10 +22,15 @@ The plan is not ready for approval until every applicable item is answered.
 ## Structure
 
 - [ ] Concepts appear in dependency order.
-- [ ] The outline answers one causal question per section.
+- [ ] The end-to-end causal chain identifies actors, actions or inputs, mechanisms or checks, and results.
+- [ ] The outline answers one reader question per section instead of using topic labels alone.
+- [ ] When defenses or mitigations are recommended, each maps to the failure condition it addresses, with conditions and limits.
 - [ ] The main article owns a bounded question.
-- [ ] Optional depth is assigned to Toggles or companion posts without making them definition-dependent.
+- [ ] Optional depth is assigned to Toggles or companion posts without outsourcing definitions essential to the main article.
+- [ ] Intentionally short companion pages remain locally understandable and define the terms they use.
 - [ ] There are no more than 6–8 narrative top-level headings.
+- [ ] A concise causal conclusion is planned before sources or deeper reading.
+- [ ] Sources are outside the top-level narrative.
 - [ ] The outline does not include a manual table of contents.
 
 ## Notion and delivery

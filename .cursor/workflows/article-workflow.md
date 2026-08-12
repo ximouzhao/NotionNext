@@ -4,7 +4,7 @@ This is the end-to-end workflow for writing, substantially revising, previewing,
 
 ## Objective
 
-Deliver a technically rigorous, readable Notion article whose metadata, rich blocks, links, Cover, and public rendering have been verified. The workflow is not complete merely because a Notion page exists.
+Deliver a technically rigorous, readable, and structurally coherent Notion article whose scenario, actors, causal chain, conclusion, metadata, rich blocks, links, Cover, and public rendering have been verified. The workflow is not complete merely because a Notion page exists.
 
 ## Quick start
 
@@ -30,9 +30,12 @@ The approved plan must define:
 
 - audience, main question, scenario, and scope;
 - terminology dependency order;
-- heading narrative;
+- an end-to-end causal chain;
+- question-driven heading narrative;
+- defense-to-failure mapping where applicable;
+- concise conclusion and non-narrative source placement;
 - claims and authoritative sources;
-- main versus companion-page ownership;
+- main versus companion-page ownership without outsourcing essential definitions;
 - Notion block choices;
 - metadata and intended final status;
 - validation and Cover requirements.
@@ -42,7 +45,7 @@ The approved plan must define:
 1. Fetch the data source immediately before writing.
 2. Read the current `notion://docs/enhanced-markdown-spec` MCP resource immediately before generating Notion content. Apply the stricter rule wherever it differs from the repository capability matrix.
 3. Confirm the slug is stable and unique.
-4. Ask `article-writer` for Notion-flavored Markdown based only on the approved plan and evidence.
+4. Ask `article-writer` for Notion-flavored Markdown based only on the approved plan and evidence, following the causal-narrative and readability rules in `.cursor/skills/notion-technical-writing/SKILL.md`.
 5. The parent creates or updates the page through the Notion MCP.
 6. New pages use:
    - `type=Post`;
@@ -77,6 +80,8 @@ Severity controls the gate:
 
 - `blocker` and `major`: must be fixed before preview or publication;
 - `minor` and `nit`: remain visible and may be accepted by the user.
+
+Apply severity by reader impact to readability and structure findings: a broken causal explanation or undefined essential concept can be `major`; a localized flow or heading issue is normally `minor`.
 
 After each review-driven change, fetch the page and rerun verification before a new independent review. Stop after three rounds and ask the user whether to accept remaining non-blocking findings or continue. Never let the writer approve its own draft.
 

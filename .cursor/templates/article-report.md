@@ -39,6 +39,16 @@ Use this template for `.tmp/article-reports/<timestamp>-<slug>.md`. Report obser
 - Remaining minor / nit findings:
 - User decision on remaining findings:
 
+## Narrative Structure
+
+- Opening scenario and actors:
+- End-to-end causal chain:
+- Question-driven headings:
+- Defense / Failure Map:
+- Concise conclusion and sources placement:
+- Companion definition boundary:
+- Readability / structure findings by severity:
+
 ## Metadata
 
 - title:
