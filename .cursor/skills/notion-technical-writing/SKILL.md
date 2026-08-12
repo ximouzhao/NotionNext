@@ -81,6 +81,112 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 - Use exact, reviewable SVG or Mermaid diagrams for labelled security flows; do not use text-heavy generative images.
 - Cite primary or authoritative sources (MDN, OWASP, standards) for browser behavior and security guidance.
 
+## Style rules learned from iterative review
+
+These rules come from reader feedback on real drafts. They are not specific to security articles. Apply them before asking for review.
+
+### 1. Start from the reader's problem, not the topic
+
+Every article answers a question the reader is already asking. Open with the moment the reader notices something is wrong, not with the definition of a term.
+
+| Article type | Weak opening (topic-first) | Strong opening (reader-first) |
+|---|---|---|
+| Security | "CSRF 是跨站请求伪造……" | "你没授权，钱却扣了" |
+| Performance | "本文介绍浏览器渲染优化……" | "页面白屏 3 秒，用户已经走了" |
+| Refactoring | "今天讲如何拆分模块……" | "这段代码每次改动都牵出三个 bug" |
+| Debugging | "GC 日志格式如下……" | "服务每隔一小时卡顿一次，日志里只有一行警告" |
+
+The pattern is the same: **concrete cost or confusion first, mechanism second.**
+
+### 2. Use scenario and evolution to carry the explanation
+
+Abstract mechanisms are easier to accept when the reader watches them solve a concrete problem. Two patterns work across genres:
+
+**Scenario story (all articles):** Place the reader inside a specific situation with named actors, a visible action, and a consequence. Do not describe the mechanism first and illustrate it later; let the mechanism emerge from the story.
+
+- Security: "你登录了 pay.example.com，另一个标签页里的 evil.example 悄悄发出一笔付款"
+- Performance: "用户点开列表页，接口返回 2MB JSON，前端渲染 4000 个节点，白屏 3 秒"
+- Refactoring: "运营要加一个导出按钮，你发现这段 800 行的函数里已经塞了 6 个不相关的功能"
+
+**Evolution / attack-defense progression (when the topic has history or opposition):** Show how the solution evolved under pressure. Each step should answer: what new requirement or attack appeared, why the old approach broke, and what the next iteration changed.
+
+- Security: 攻击者找到新绕过方式 → 防线打补丁 → 攻击者再进化 → 防线再调整
+- Architecture: 需求 A 导致实现 X → 需求 B 出现，X 撑不住 → 演进为 Y → 需求 C 又暴露 Y 的边界
+- Tooling: 团队手动执行流程 → 出错率高 → 写脚本 → 脚本分散难维护 → 收拢为平台
+
+The evolution pattern prevents the article from feeling like a static specification. It gives the reader a reason to care about each design decision, because they saw the failure that motivated it.
+
+**Caution:** do not invent fake history or fake attacks. If the real evolution is unknown, frame it as "一个常见的演进路径是……" or "假设你先遇到 A，再遇到 B". Label speculation clearly.
+
+### 3. Keep one protagonist
+
+Pick who the article is about and stay with them.
+
+- If it is the reader, use "你" or "你的系统" in headings, quotes, and the recap.
+- If it is a team or a service, name them once and keep referring to them.
+- Do not switch to the attacker, the framework, the spec, or the database halfway through unless the article is explicitly about their internals.
+
+**Test:** read every pull quote and heading aloud. If the subject changes from "you" to "the attacker" or "the GC", the perspective has drifted.
+
+### 4. Expand compressed abstractions
+
+Do not write slogans that only make sense after the reader already understands the mechanism.
+
+| Compressed | Expanded |
+|---|---|
+| "读不到 ≠ 做不到" | "浏览器拦住了脚本看到结果，却没拦住服务器执行付款" |
+| "拦看不拦发" | "浏览器不阻止表单发出去，只阻止脚本读响应" |
+
+The problem is not technical terms themselves—"最终一致性" and "无状态服务" are fine because they are established industry terms. The problem is **author-coined shorthand** that compresses a causal claim into a slogan. If you invented the phrase for this article, expand it into actor + action + result.
+
+If a sentence needs more than two technical terms, split it or move the precise definition to a toggle.
+
+### 5. Metaphors are scaffolding, not the building
+
+A metaphor helps a reader enter a concept. It becomes a liability when it is stretched, mixed, or left standing after the real mechanism has been named.
+
+- **Use a metaphor only when the reader has no existing mental hook.** If the reader already knows what a session token is, do not call it a "门禁卡".
+- **One metaphor per concept, and do not mix metaphors in the same paragraph.** If Cookie is a "门禁卡", do not also call it "凭证" or "票据" nearby.
+- **Drop the metaphor as soon as the formal name and mechanism are established.** Continuing to say "刷卡" after defining `SameSite` forces the reader to translate twice.
+- **Do not extend the metaphor beyond its useful range.** "刷卡" is fine; "卡号被复制" starts to mislead because CSRF does not copy the Cookie value.
+- **Prefer no metaphor over a strained one.** If the plain mechanism name is clearer than any analogy, skip the analogy.
+
+The goal is not to eliminate metaphors, but to make sure each one earns its place and then gets out of the way.
+
+### 6. Say what a mechanism does NOT do
+
+Readers assume protections are broader than they are. State the boundary explicitly.
+
+- SOP does not stop requests; it stops scripts from reading responses.
+- CORS does not authenticate users; it lets servers declare which origins may read responses.
+- `HttpOnly` does not stop the browser from sending the Cookie; it stops scripts from reading it.
+- A cache does not guarantee freshness; it guarantees a faster answer within a TTL.
+
+### 7. Match the block to the job
+
+| Block | Use it for | Do not use it for |
+|---|---|---|
+| Pull quote | A causal contrast the reader cares about | Restating a paragraph in fancier words |
+| Callout | A sharp boundary or warning | Decoration or ordinary emphasis |
+| Table | "Which one" or "under what condition" | Explaining "why" or "how" |
+| Columns | Genuine side-by-side comparison | Shortening a long section |
+| Divider | Separating major acts of the article | Between every H2 |
+| Toggle | Precise conditions, exceptions, derivations | Hiding the main causal chain |
+
+### 8. Review triggers
+
+If a reviewer says any of the following, apply the matching fix:
+
+| Reviewer phrase | Likely problem | Fix |
+|---|---|---|
+| "太晦涩" / "看不懂" | Compressed abstraction or term stacking | Expand into actor + action + result |
+| "为什么要关心攻击者" | Perspective drift to attacker | Reframe around reader's stake |
+| "为什么要关心框架内部" | Perspective drift to mechanism | Show what breaks or slows down for the reader |
+| "这里不要提 X" | Mixed metaphor or unnecessary jargon | Remove metaphor, use plain mechanism name |
+| "全是话" | Prose that should be a table or list | Extract conditions into a table, keep one sentence of lead-in |
+| "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
+| "像规范摘要" | Missing scenario or evolution | Add a concrete story or show how the solution evolved under pressure |
+
 ## NotionNext publishing workflow
 
 1. Inspect the destination database schema before writing.
