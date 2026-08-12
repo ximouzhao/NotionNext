@@ -7,6 +7,16 @@ description: Writes and revises clear, rigorous technical blog posts and Notion 
 
 Write for readers who are curious but do not already know the terminology. Keep the main article easy to follow without weakening technical claims; put depth in well-scoped sections, toggles, or linked companion posts.
 
+## Workflow entrypoints
+
+- Planning only: `.cursor/workflows/article-plan-workflow.md`
+- Full Draft → review → Invisible preview → publication flow: `.cursor/workflows/article-workflow.md`
+- Supported Notion blocks: `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`
+- Saved-page and public-render verification: `../verify-notion-article/SKILL.md`
+- Cover upload: `../upload-notion-cover/SKILL.md`
+
+New or substantially revised articles require an approved plan before a Notion write. New pages start as `Draft`; substantial revisions of live articles use a staging copy. Preview, revision deployment, and publication are separate user approval gates.
+
 ## Core rules
 
 1. Start with one concrete scenario, question, or failure case. Carry the same actors through the article.
@@ -63,26 +73,32 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 ## NotionNext publishing workflow
 
 1. Inspect the destination database schema before writing.
-2. Create new articles as `Post` with `status=Draft` unless the user explicitly requests publication.
-3. Use Notion callouts, headings, short tables, toggles, code blocks, and diagrams to support—not replace—the narrative.
-4. **Do not insert a manual table of contents at the top of the article.** NotionNext already generates the in-page progress catalog / TOC from headings. Never add:
+2. Read the current `notion://docs/enhanced-markdown-spec` MCP resource and intersect it with `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`.
+3. Create new articles as `Post` with `status=Draft` unless the user explicitly requests publication.
+4. Stage substantial revisions of a `Published` page in a separate Draft copy; deploy the approved body, properties, and any approved Cover change to the original canonical page only after explicit approval and target revalidation.
+5. Use Notion callouts, headings, short tables, toggles, code blocks, and diagrams to support—not replace—the narrative.
+6. **Do not insert a manual table of contents at the top of the article.** NotionNext already generates the in-page progress catalog / TOC from headings. Never add:
    - a Notion `<table_of_contents/>` block
    - a pasted screenshot or image of the outline
    - a hand-written bullet list that only restates upcoming headings
    Start the body with the opening scenario / callout, then the first real section heading.
-5. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`.
-6. Link companion pages with the public site route `https://blog.ximouzhao.com/article/<slug>` (for example `https://blog.ximouzhao.com/article/cors-and-csrf`). Never use bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
-7. After writing, fetch the page to verify properties, heading hierarchy, links, images, and first-use definitions.
+7. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`.
+8. Link companion pages with the public site route `https://ximouzhao.com/article/<slug>` (for example `https://ximouzhao.com/article/cors-and-csrf`). Never use `https://blog.ximouzhao.com/...` (origin-only host), bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
+9. After writing, fetch the page and run `verify-notion-article`; Notion UI correctness does not prove NotionNext rendering.
+10. Treat `Draft`, `Invisible`, and the site's article password as workflow/UI controls, not confidentiality boundaries. Never store confidential material in this site database.
+11. Use `Invisible` only after explicit approval for public-site preview.
+12. Set a main article to `Published` only after a separate explicit publication approval.
 
 ## Article cover images
 
-Generate per-article Notion covers when the user asks. Do not overwrite articles that already have a custom uploaded cover (Notion `attachment:` / custom file covers). Stock Notion gallery covers may be replaced.
+Generate per-article Notion covers when the user asks. Fetch the target page and inspect its slug and current Cover first. Replacing any existing Cover—including a stock gallery Cover—requires explicit approval and the script's replacement flag.
 
 ### Capability limits
 
-- Notion MCP can upload files and can set `cover` only via an image URL.
-- Do **not** use the workaround of inserting a temp image into the page body, then promoting it to cover. It leaves junk in the article and is unreliable.
-- Deliver generated cover files locally. The user sets the cover in Notion with **Change cover → Upload**.
+- The Hosted Notion MCP cannot attach its uploaded file as a page Cover because its `cover` field accepts only external URLs.
+- Notion's official API does support `file_upload` Covers; use the official `ntn` CLI through `../upload-notion-cover/SKILL.md` and `scripts/notion/upload-page-cover.mjs`.
+- Do **not** insert a temporary image into the page body and promote it to Cover.
+- Do **not** use a one-hour signed Notion download URL as an external Cover.
 
 ### Visual style
 
@@ -101,16 +117,18 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 
 ### Output directory
 
-- Save deliverable covers under `.tmp/covers/` (gitignored).
+- Save final deliverable Covers under `public/images/covers/` so they are version-controlled and reusable by the site.
 - Filename: `cover-<slug-or-short-id>.png` (prefer article `slug` when present).
-- Optionally keep a working source under Cursor assets; the file the user uploads must be the padded **3:1** deliverable in `.tmp/covers/`.
+- Keep intermediate generation files outside the tracked Cover directory; only the padded **3:1** deliverable belongs in `public/images/covers/`.
 
 ### Workflow checklist
 
-- [ ] Skip pages that already have custom covers.
+- [ ] Confirm target page title, exact slug, and existing Cover state.
+- [ ] Obtain explicit approval before replacing any existing Cover.
 - [ ] Match cover metaphor to the article’s concrete scenario.
 - [ ] Verify browser/panel frames are fully visible after the 3:1 fit (no clipped tops/bottoms), without over-shrinking the scene.
-- [ ] Place files in `.tmp/covers/` and tell the user to upload via Notion **Change cover → Upload**.
+- [ ] Place the final file in `public/images/covers/cover-<slug>.png`.
+- [ ] Run the Cover uploader dry run, upload only after authorization, and fetch the page to verify the attached Notion-hosted Cover.
 
 ## Pre-publication review
 
@@ -121,4 +139,6 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 - [ ] Website-specific claims are either sourced or explicitly framed as a generic pattern.
 - [ ] Heading hierarchy reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
 - [ ] The page does not begin with `<table_of_contents/>`, a TOC screenshot, or a duplicate outline list.
-- [ ] Main article and companion links use `https://blog.ximouzhao.com/article/<slug>` and the intended NotionNext status.
+- [ ] Main article and companion links use `https://ximouzhao.com/article/<slug>` and the intended NotionNext status.
+- [ ] Independent review has no blocker or major findings.
+- [ ] Invisible preview and Published status changes have the required separate user approvals.

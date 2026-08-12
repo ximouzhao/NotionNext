@@ -1,0 +1,23 @@
+---
+description: Non-negotiable approval and review gates for Notion article mutations
+alwaysApply: true
+---
+
+# Article Workflow Gates
+
+Apply these gates only when a request creates, substantially revises, previews, or publishes a Notion article.
+
+- Read `.cursor/skills/notion-technical-writing/SKILL.md` and the relevant workflow before writing.
+- New articles, security-sensitive articles, and multi-page series require a written plan and explicit approval before a Notion page is created or substantially replaced.
+- New pages default to `type=Post` and `status=Draft`.
+- Substantial revisions of `Published` pages use a separate Draft staging copy. Deploying reviewed content to the canonical page is a distinct approval gate.
+- The parent owns Notion mutations; planning, research, writing, and review agents do not publish.
+- The writer never reviews or approves its own article.
+- Resolve every blocker and major review finding before site preview or publication.
+- `Draft`, `Invisible`, and the site's article password are not confidentiality controls. Do not store confidential material in this site database.
+- Changing `Draft` to `Invisible` requires explicit approval and a warning that the URL may be directly accessible.
+- Changing a main article to `Published` requires a separate explicit approval.
+- Companion pages use a stable slug, normally remain `Invisible`, and link through `https://ximouzhao.com/article/<slug>`.
+- A requested Cover is generated under `public/images/covers/`, reviewed locally, uploaded with the approved Cover skill, and verified after attachment. Replacing any existing Cover requires explicit approval, including when deploying from a staging page to the canonical page.
+- Fetch the saved page after every substantive mutation. Verify the public NotionNext route during Invisible preview and after publication.
+- Do not create commits unless the user explicitly asks.
