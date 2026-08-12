@@ -161,6 +161,7 @@ Readers assume protections are broader than they are. State the boundary explici
 - CORS does not authenticate users; it lets servers declare which origins may read responses.
 - `HttpOnly` does not stop the browser from sending the Cookie; it stops scripts from reading it.
 - A cache does not guarantee freshness; it guarantees a faster answer within a TTL.
+- When the topic is an attack, describe the attacker's full capability boundary—what they cannot read, cannot see, and cannot control—not just the slice one mechanism blocks. Otherwise readers infer the attacker's goal from the mechanism's scope (e.g., reading "SOP blocks response reading" as "the attacker was trying to read the response").
 
 ### 7. Match the block to the job
 

@@ -375,15 +375,60 @@ async function preflightPage({
 }
 
 /**
- * @param {{cover: ValidatedCover, expectedSlug: string, pageId: string, replaceExistingCover: boolean}} input
- * @returns {Promise<{attachmentPreflight: {actualSlug: string, replacedExistingCover: boolean}, uploadId: string}>}
+ * Free-plan workspaces reject multipart uploads; stage the file through the
+ * single-part File Upload flow instead.
+ * @param {ValidatedCover} cover
+ * @returns {Promise<string>}
  */
-async function uploadCover({
-  cover,
-  expectedSlug,
-  pageId,
-  replaceExistingCover
-}) {
+async function createSinglePartUpload(cover) {
+  const created = await runNtnJson(
+    [
+      'api',
+      'v1/file_uploads',
+      '-X',
+      'POST',
+      '--notion-version',
+      API_VERSION,
+      '--data',
+      JSON.stringify({
+        mode: 'single_part',
+        filename: cover.filename,
+        content_type: cover.contentType
+      })
+    ],
+    { stage: 'Create single-part file upload' }
+  )
+  if (!created.id) {
+    throw new Error('Create single-part file upload failed: missing upload id')
+  }
+
+  const sent = await runNtnJson(
+    [
+      'api',
+      `v1/file_uploads/${created.id}/send`,
+      '-X',
+      'POST',
+      '--notion-version',
+      API_VERSION,
+      '--file',
+      cover.absolutePath
+    ],
+    { stage: 'Send single-part file upload' }
+  )
+  if (sent.status && sent.status !== 'uploaded') {
+    throw new Error(
+      `Send single-part file upload failed: expected uploaded status, received ${sent.status}`
+    )
+  }
+
+  return created.id
+}
+
+/**
+ * @param {ValidatedCover} cover
+ * @returns {Promise<string>}
+ */
+async function createMultipartUpload(cover) {
   const upload = await runNtnJson(
     [
       'files',
@@ -408,6 +453,30 @@ async function uploadCover({
     )
   }
 
+  return upload.id
+}
+
+/**
+ * @param {{cover: ValidatedCover, expectedSlug: string, pageId: string, replaceExistingCover: boolean}} input
+ * @returns {Promise<{attachmentPreflight: {actualSlug: string, replacedExistingCover: boolean}, uploadId: string}>}
+ */
+async function uploadCover({
+  cover,
+  expectedSlug,
+  pageId,
+  replaceExistingCover
+}) {
+  let uploadId
+  try {
+    uploadId = await createMultipartUpload(cover)
+  } catch (error) {
+    const message = /** @type {Error} */ (error).message
+    if (!message.includes('single_part')) {
+      throw error
+    }
+    uploadId = await createSinglePartUpload(cover)
+  }
+
   const attachmentPreflight = await preflightPage({
     expectedSlug,
     pageId,
@@ -426,14 +495,14 @@ async function uploadCover({
       JSON.stringify({
         cover: {
           type: 'file_upload',
-          file_upload: { id: upload.id }
+          file_upload: { id: uploadId }
         }
       })
     ],
     { stage: 'Attach page Cover' }
   )
 
-  return { attachmentPreflight, uploadId: upload.id }
+  return { attachmentPreflight, uploadId }
 }
 
 async function main() {
