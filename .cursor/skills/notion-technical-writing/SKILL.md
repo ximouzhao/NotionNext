@@ -78,8 +78,15 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 - Use reserved example domains such as `pay.example.com` and `evil.example`; never include real payment endpoints or claim a real provider uses a specific hidden field.
 - Explain each line of code that matters. Label examples as demonstrations, not proof that every site is vulnerable.
 - Prefer simple diagrams that preserve one scenario and one action per step.
+- A new article that describes a process, a multi-actor interaction, or a decision chain should include at least one diagram by default—not as decoration, but as a planned carrier of the causal chain. Match the diagram type to the content shape: sequence diagram for multi-actor timelines, flowchart for branching decisions, table for parallel conditions. If a draft of such an article has no visual, the plan must justify why.
 - Use exact, reviewable SVG or Mermaid diagrams for labelled security flows; do not use text-heavy generative images.
 - Cite primary or authoritative sources (MDN, OWASP, standards) for browser behavior and security guidance.
+- When replacing or superseding an older article, audit its figures and diagrams as carefully as its prose. For each visual in the old article, decide explicitly: already covered by a better visual, deliberately dropped, or recreated in the new article.
+- For a new article, audit the existing corpus instead: search for related and companion articles, decide what the new article owns versus links to, and reuse or refresh existing explanations and diagrams rather than creating a parallel version.
+- Budget visuals at plan time, not as decoration after the draft is written. For each planned rich block (diagram, table, callout, columns), name the job it does—comparison, mechanism loop, boundary warning. A block without a job does not belong in the plan.
+- Mechanisms with a generate → distribute → verify loop (Token flows, handshakes, challenge-response) are strong diagram candidates; a small Mermaid diagram can replace a dense prose paragraph.
+- Never reference another page's Notion-hosted image by its signed URL; signed URLs expire. Recreate the diagram as Mermaid or a tracked asset under `public/images/` instead.
+- A new diagram should replace dense prose, not stack on top of it. If the page already carries many rich blocks, adding one more means removing something.
 
 ## Style rules learned from iterative review
 
@@ -187,6 +194,8 @@ If a reviewer says any of the following, apply the matching fix:
 | "全是话" | Prose that should be a table or list | Extract conditions into a table, keep one sentence of lead-in |
 | "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
 | "像规范摘要" | Missing scenario or evolution | Add a concrete story or show how the solution evolved under pressure |
+| "旧文的图更多 / 更直观" | Visual audit skipped during revision | Compare the old article's figures one by one; absorb, recreate, or deliberately drop each |
+| "这和已有那篇重复了" | Corpus overlap check skipped for a new article | Decide what the new article owns versus links to; refresh the existing article or narrow the new one's scope |
 
 ## NotionNext publishing workflow
 
