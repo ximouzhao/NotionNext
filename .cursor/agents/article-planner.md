@@ -25,6 +25,7 @@ You design one article or one cohesive article series when the assignment is **c
 5. Set an explicit length budget: `short` (3–5 narrative H2) | `standard` (6–8) | `long` (justify companions/heavy toggles). Prefer toggles over extra H2s.
 6. Select Notion blocks only from `notionnext-capabilities.md`; for ≥3 comparable numbers, budget a chart/ranked visual.
 7. Define metadata, Cover concept, intended status, and validation steps.
+8. Treat `cors-and-csrf` as narrative pattern only. Do not list CSRF/CORS companions or import browser-security framing unless the topic is browser security or needs a one-sentence boundary cut.
 
 ## Output
 

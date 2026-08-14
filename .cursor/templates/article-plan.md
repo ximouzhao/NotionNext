@@ -22,7 +22,7 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 - Scenario and actors:
 - In scope:
 - Out of scope:
-- Style anchor: https://ximouzhao.com/article/cors-and-csrf (narrative pattern only)
+- Style anchor: https://ximouzhao.com/article/cors-and-csrf (narrative pattern only; do **not** import CSRF/CORS content unless this topic is browser security or needs a one-sentence boundary cut)
 
 ## Investigation Evidence
 

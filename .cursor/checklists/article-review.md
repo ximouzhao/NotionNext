@@ -35,6 +35,7 @@ This is the canonical criteria list for `article-reviewer`.
 - [ ] Specialized terms appear in dependency order before later sections rely on them.
 - [ ] The complete causal chain is traceable from actors and inputs through mechanisms or checks to observable results, or its absence is justified.
 - [ ] For browser-security flows, request sending, credential attachment, response readability, and server acceptance are separated where applicable.
+- [ ] Non-browser-security articles do not smuggle CSRF/CORS/SOP framing, metaphors, or default cors-and-csrf related reading; any boundary cut is at most one sentence + link.
 - [ ] Main headings answer reader questions rather than merely label topics.
 - [ ] Code, diagrams, tables, Toggles, and Callouts support rather than replace explanation.
 - [ ] Multi-item numeric comparisons (≥3 scores, prices, or latencies of the same kind) use a chart or ranked visual plus short one-number-per-cell tables; no semicolon-joined score dumps in a cell or sentence.

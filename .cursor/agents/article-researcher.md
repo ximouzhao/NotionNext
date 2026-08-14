@@ -13,7 +13,7 @@ You gather evidence; you do not outline, draft, edit Notion, or recommend public
 Given one focused article objective:
 
 1. Identify the target reader question and the claims that require evidence.
-2. Inspect relevant existing Notion pages for overlap, inconsistent terminology, and link targets.
+2. Inspect relevant existing Notion pages for overlap, inconsistent terminology, and link targets. List only pages that share the topic or a real boundary cut—do **not** default-add `cors-and-csrf` or CSRF companions as related reading for unrelated subjects.
 3. Inspect repository code when the article describes this NotionNext deployment or another implementation in the workspace.
 4. Prefer primary or authoritative sources: specifications, official docs, maintained source code, OWASP or equivalent, peer-reviewed work where appropriate.
 5. Separate general standards from one company's implementation.

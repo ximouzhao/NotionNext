@@ -21,11 +21,23 @@ New or substantially revised articles require an approved plan before a Notion w
 
 ## Style anchor (golden sample)
 
-Primary narrative pattern to imitate:
+Primary **narrative** pattern to imitate (not the security topic):
 
 - Public article: [https://ximouzhao.com/article/cors-and-csrf](https://ximouzhao.com/article/cors-and-csrf)
 - What to copy: reader-first opening, stable actors, question-driven headings, end-to-end causal chain, explicit “does not do” boundaries, diagrams/tables that carry mechanism rather than decorate.
-- What not to copy blindly: CSRF/CORS metaphors and browser-security framing into unrelated topics. For comparisons or framework pieces, keep the same narrative discipline with a shared workload and early scannable surface.
+- What **not** to copy: CSRF/CORS metaphors, Cookie/SOP framing, attack–defense evolution borrowed from that page, or default “link cors-and-csrf” padding. For comparisons or framework pieces, keep the same narrative discipline with a shared workload and early scannable surface.
+
+### CSRF / CORS mention hard rule
+
+`cors-and-csrf` is a style sample. It is **not** a required related article, background, or default contrast for every draft.
+
+| Topic | CSRF / CORS / SOP / SameSite in body or plan |
+|---|---|
+| Browser security, cookies, CORS, CSRF, clickjacking, or related web-platform controls | Allowed; follow `./browser-security-terminology.md` |
+| Adjacent topic that must cut a boundary (e.g. leave-site confirm ≠ CSRF defense) | At most one short sentence + public `/article/<slug>` link; do not rewrite the CSRF/CORS article |
+| Unrelated (NestJS, Redis, model selection, UA/download redirect, DDD, tooling, etc.) | **Forbidden** in prose, Callouts, defense tables, metaphors, and “related reading” unless the user explicitly asks |
+
+Plans for unrelated topics must say `Style anchor: cors-and-csrf（叙事纪律 only）` and must **not** list CSRF companions as related pages by default.
 
 ## Evidence hard gate
 
@@ -54,8 +66,8 @@ Do not grow the main article by stacking encyclopedia sections. Move optional de
 1. Start with one concrete scenario, question, or failure case. Carry the same actors through the article.
 2. Introduce concepts in dependency order: observable behavior → plain-language explanation → formal name → exact mechanism and boundaries.
 3. On first use, write the Chinese name, English full name, abbreviation, and a one-sentence explanation.
-   - Example: `CSRF（Cross-Site Request Forgery，跨站请求伪造）`
    - Example: `依赖注入（Dependency Injection，DI）`
+   - Browser-security articles only: `CSRF（Cross-Site Request Forgery，跨站请求伪造）` — do not use CSRF as the default first-use example for unrelated topics.
 4. Never rely on a definition from a distant section. A toggle, table row, or companion post must define the terms it uses.
 5. Replace vague claims with conditions. State who acts, what is checked, and when the behavior does or does not happen.
 6. Pass the evidence hard gate before any Notion write.
@@ -95,7 +107,7 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 
 - Keep definitions local and ordered; do not make readers decode jargon while learning the mechanism.
 - Say what a mechanism does **not** do once the positive claim is clear.
-- For browser-security articles only, also follow `./browser-security-terminology.md`. Do not apply that appendix's CSRF/CORS framing to unrelated subjects.
+- For browser-security articles only, also follow `./browser-security-terminology.md`. Do not apply that appendix's CSRF/CORS framing to unrelated subjects (see **CSRF / CORS mention hard rule** above).
 
 ## Examples, figures, and sources
 
@@ -123,7 +135,7 @@ Every article answers a question the reader is already asking. Open with the mom
 
 | Article type | Weak opening (topic-first) | Strong opening (reader-first) |
 |---|---|---|
-| Security | "CSRF 是跨站请求伪造……" | "你没授权，钱却扣了" |
+| Security (when the topic is CSRF/CORS) | "CSRF 是跨站请求伪造……" | "你没授权，钱却扣了" |
 | Performance | "本文介绍浏览器渲染优化……" | "页面白屏 3 秒，用户已经走了" |
 | Refactoring | "今天讲如何拆分模块……" | "这段代码每次改动都牵出三个 bug" |
 | Debugging | "GC 日志格式如下……" | "服务每隔一小时卡顿一次，日志里只有一行警告" |
@@ -279,6 +291,7 @@ If a reviewer says any of the following, apply the matching fix:
 | "为什么要关心攻击者" | Perspective drift to attacker | Reframe around reader's stake |
 | "为什么要关心框架内部" | Perspective drift to mechanism | Show what breaks or slows down for the reader |
 | "这里不要提 X" | Mixed metaphor or unnecessary jargon | Remove metaphor, use plain mechanism name |
+| "为什么又提 CSRF" / "无关文串 CSRF" | Style-sample contamination from cors-and-csrf | Delete CSRF/CORS framing; keep narrative discipline only; boundary cut = one sentence + link max |
 | "全是话" | Prose that should be a table or list | Extract conditions into a table, keep one sentence of lead-in |
 | "谁能看清楚" / "网上不都是有很多图吗" | Multi-item numbers jammed into prose or one table cell | Replace with a bar/ranked chart plus a one-number-per-cell table; put version/effort beside the visual |
 | "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
@@ -350,6 +363,7 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 ## Pre-publication review
 
 - [ ] The first screen explains why the reader should care and follows the golden-sample narrative pattern.
+- [ ] Unrelated topics do not import CSRF/CORS/SOP framing, metaphors, or default cors-and-csrf “related reading”; boundary cuts stay one sentence + link.
 - [ ] Claim Matrix covers every material body claim; evidence was spot-checked; `low`/`Unknown` items are out of the main conclusion.
 - [ ] Time-sensitive facts show a current `Evidence as of` / recheck date.
 - [ ] The draft stays inside the planned length budget.

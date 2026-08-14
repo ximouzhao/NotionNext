@@ -1,6 +1,10 @@
 # Browser Security Terminology Appendix
 
-Use this appendix only when the article is about browser security, cookies, CORS, CSRF, clickjacking, or related web-platform controls. Do not import these metaphors or framing into unrelated topics (NestJS, model selection, DDD, etc.).
+Use this appendix **only** when the article is about browser security, cookies, CORS, CSRF, clickjacking, or related web-platform controls.
+
+Do **not** open this appendix, copy its metaphors, or name CSRF/CORS/SOP/SameSite as contrast topics for unrelated work (NestJS, Redis, model selection, UA/download redirect, DDD, tooling, etc.). Adjacent articles that must cut a boundary may use one short sentence plus a public `/article/<slug>` link—nothing more.
+
+The golden sample `cors-and-csrf` teaches narrative discipline for all articles; it does **not** authorize CSRF content in every article.
 
 ## Core distinctions
 
