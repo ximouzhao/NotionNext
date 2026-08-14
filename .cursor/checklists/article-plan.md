@@ -36,6 +36,8 @@ The plan is not ready for approval until every applicable item is answered.
 ## Notion and delivery
 
 - [ ] Every proposed rich block has an explanatory purpose.
+- [ ] Multi-model or multi-price comparisons budget a chart/ranked visual (Mermaid `xychart-beta` or tracked image); if skipped, the plan justifies a short one-number-per-cell table.
+- [ ] No planned table cell packs multiple models or multiple scores into one unreadably long string.
 - [ ] All proposed blocks exist in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`.
 - [ ] Title, slug, summary, date, category, tags, Cover concept, and intended status are proposed.
 - [ ] Canonical and companion links use `/article/<slug>`.

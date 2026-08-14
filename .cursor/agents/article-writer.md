@@ -35,10 +35,15 @@ Where the live enhanced Markdown specification and repository capability matrix 
 9. Label examples as demonstrations and use reserved example domains.
 10. Explain every code line that matters.
 11. Use Callouts, Toggles, Mermaid, tables, columns, equations, images, and checklists only where the plan assigns them, and never instead of the prose explanation.
+11a. Never pack multiple model names and scores into one table cell or dense sentence (for example `Claude … 63；GPT … 61；…`). For ≥3 comparable numbers, render a Mermaid `xychart-beta` or tracked chart image first, then a short one-number-per-cell table if exact values are needed. State version/effort/date beside the visual.
 12. End with a concise causal recap before sources or deeper reading; do not make References a top-level narrative section.
 13. Do not add `<table_of_contents/>`; NotionNext derives navigation from headings.
 14. Use `https://ximouzhao.com/article/<slug>` for companion links. Companions may be narrow, but must be locally understandable and cannot replace definitions essential to the main article.
-15. Preserve user-authored content outside the approved revision scope.
+15. Keep editorial workflow words out of reader-facing prose. Never write `Draft` / `Invisible` / `Published` status jargon, `companion`, `staging`, or 「预览向」 into Callouts, Toggles, link notes, or source blurbs. Put ownership and status only in the plan or writer notes.
+16. Inside `<callout>` and `<details>`, never use a lone `<br>` as a paragraph spacer—it creates large blank gaps in Notion. Prefer one paragraph or separate indented children without `<br>`.
+17. Expand author-coined checklist shorthand (e.g. `ID→URL`) into plain actor + action Chinese before shipping.
+18. Do not nest bold markers around inline code in a way that can emit `****` artifacts; keep code spans outside bold when needed.
+19. Preserve user-authored content outside the approved revision scope.
 
 ## Output
 

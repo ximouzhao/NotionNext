@@ -56,7 +56,7 @@ For browser-security flows, the default causal chain separates whether a request
 
 Companion pages may be intentionally short, but every page must define the terms it uses. Keep definitions essential to the main question in the main article rather than outsourcing them to a companion.
 
-Choose Notion blocks deliberately. The plan must state where Callouts, Mermaid, code, tables, Toggles, equations, images, captions, quotes, columns, or checklists improve comprehension. Use only capabilities listed in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`.
+Choose Notion blocks deliberately. The plan must state where Callouts, Mermaid, code, tables, Toggles, equations, images, captions, quotes, columns, or checklists improve comprehension. Use only capabilities listed in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`. When the article compares ≥3 models, prices, or latencies of the same kind, the plan must budget a chart or ranked visual (Mermaid `xychart-beta` or tracked image) instead of packing scores into one table cell.
 
 ## Phase 4 — Plan artifact and hard stop
 

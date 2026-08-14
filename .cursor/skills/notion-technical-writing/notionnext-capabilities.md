@@ -31,6 +31,8 @@ Rich blocks support the causal narrative; they do not replace prose that identif
 
 Use for the opening scenario, a critical boundary, or one practical warning. Do not stack Callouts as ordinary paragraphs.
 
+Do **not** put a lone `<br>` between Callout paragraphs. In this MCP → Notion path it often becomes a large empty gap. Write one paragraph, or indent a second child paragraph without `<br>`.
+
 ### Toggles
 
 ```markdown
@@ -42,15 +44,24 @@ Use for the opening scenario, a critical boundary, or one practical warning. Do 
 
 Use for optional derivations, edge cases, or advanced variants. Indent children. Define every specialized term used inside the Toggle.
 
+Same spacing rule as Callouts: no lone `<br>` spacers between Toggle children.
+
 ### Tables
 
 Use Notion `<table>` syntax with `header-row="true"` for compact comparisons. Cells support rich text only, not nested lists, images, headings, or code blocks. Keep tables narrow enough for mobile layouts.
+
+**Scannability rules for comparison tables:**
+
+- One idea per cell. Never pack multiple models, scores, prices, or effort levels into one cell with semicolons or inline lists.
+- Prefer one model (or one option) per row and one metric per score/price column.
+- If a cell needs more than about one short phrase, move the detail to prose, a Toggle, or a chart caption.
+- Tables answer "which / under what condition"; they do not replace a ranking chart when ≥3 comparable numbers are the point.
 
 ### Code and Mermaid
 
 Use fenced code blocks with the exact language. Explain consequential lines in the narrative.
 
-Mermaid is supported by `components/PrismMac.js` only when the code block produces the `language-mermaid` class:
+Mermaid is supported by `components/PrismMac.js` only when the code block produces the `language-mermaid` class. The site default CDN is Mermaid **11.4.0** (`conf/code.config.js`), which supports `flowchart`, `sequenceDiagram`, and `xychart-beta`.
 
 ````markdown
 ```mermaid
@@ -59,9 +70,24 @@ flowchart LR
 ```
 ````
 
+For multi-item numeric comparisons (benchmark scores, sample costs, latency), prefer a bar chart when axes stay simple:
+
+````markdown
+```mermaid
+xychart-beta
+    title "Artificial Analysis Index (illustrative)"
+    x-axis ["Claude Opus 5", "GPT-5.6 Sol", "Grok 4.6", "DeepSeek 0813"]
+    y-axis "Score" 0 --> 70
+    bar [63, 61, 61, 53]
+```
+````
+
 - Use lowercase `mermaid`.
 - Keep one action per edge and quote labels containing punctuation.
 - For security and other mechanistic flows, preserve the article's causal chain rather than combining distinct decisions into one edge.
+- Put version, reasoning effort, date, and "what this score is not" in the caption or the paragraph immediately under the chart.
+- If `xychart-beta` is too constrained (mixed currencies, many series, long labels), use a tracked SVG/PNG under `public/images/` with the same caption rules instead of stuffing numbers into a table cell.
+- Always verify Mermaid charts on the public NotionNext route; Notion UI does not prove chart rendering.
 - Do not rely on PlantUML auto-rendering; it remains a normal code block.
 
 ### Equations

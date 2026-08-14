@@ -22,6 +22,15 @@ Work through `.cursor/checklists/article-review.md`. Report every concrete findi
 
 For every article, verify that the target reader can follow the main question, actors, terminology dependencies, and complete causal or explanatory flow; require an explicit justification when an end-to-end causal chain does not apply. For mechanistic or security articles, trace the chain step by step. Where defenses are recommended, verify that each maps to the failure condition it addresses. Intentionally short companion pages are acceptable only when they remain locally understandable and do not outsource definitions essential to the main article.
 
+Treat unreadably dense quantitative comparisons as a readability defect: if ≥3 comparable scores, prices, or latencies appear as a semicolon-joined dump in one cell or sentence, or if a comparison article has no chart/ranked visual when readers would expect one, classify as `major` when the target reader cannot rank the options at a glance; otherwise `minor`.
+
+Also flag these presentation defects from the leave-site-confirm revision lessons:
+
+- editorial workflow jargon in reader prose (`Invisible`, `companion`, `staging`, 「预览向」, status labels) — usually `minor`, `major` if it dominates a Callout or confuses the main boundary;
+- lone `<br>` spacers inside Callouts/Toggles that create large blank gaps — `minor`;
+- author-coined arrow slogans in checklists/defense rows (e.g. `ID→URL`) that the target reader must reverse-engineer — `minor`, or `major` if an essential defense step is opaque;
+- broken Notion rich text such as `****` around inline code — `minor`.
+
 ## Severity
 
 - `blocker`: materially false or unsafe guidance, destructive publishing error, inaccessible core content, or wrong-page mutation risk.

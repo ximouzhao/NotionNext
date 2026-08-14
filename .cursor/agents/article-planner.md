@@ -24,6 +24,7 @@ For a complex assignment, obtain a focused report from `article-researcher`. If 
 8. Move optional depth into Toggles or companion posts. Companions may be short, but must define their own terms and cannot hold definitions essential to the main article.
 9. Design no more than 6–8 narrative top-level headings, followed by a concise causal conclusion; keep sources outside the top-level narrative.
 10. Select only useful Notion blocks from `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`.
+10a. For multi-model, multi-price, or multi-latency comparisons (≥3 comparable numbers), budget a chart or ranked visual (Mermaid `xychart-beta` or tracked SVG/PNG) as the primary scan surface; keep exact values in a narrow one-number-per-cell table. Never plan semicolon-joined score dumps inside a table cell.
 11. Map every material section to supporting evidence and identify claims that must be qualified.
 12. Define metadata, Cover concept, intended status, and verification steps.
 
@@ -76,6 +77,7 @@ For a complex assignment, obtain a focused report from `article-researcher`. If 
 
 - Callouts:
 - Mermaid / code / equations:
+- Charts / ranked visuals (required when ≥3 comparable numbers):
 - Tables / Toggles / columns:
 - Images and captions:
 

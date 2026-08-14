@@ -61,6 +61,7 @@ Draft is a valid workflow value and is excluded from normal `allPages` discovery
 - Mermaid language is lowercase `mermaid`;
 - Toggle children are indented and locally understandable;
 - tables contain short rich text and are not excessively wide;
+- multi-item numeric comparisons do not pack multiple models/scores into one cell; charts or ranked visuals are present when ≥3 comparable numbers are the point;
 - equations have plain-language explanations;
 - images have captions or adjacent explanatory text;
 - no critical content depends on an unknown block, unshared synced block, or unsupported link preview;

@@ -79,6 +79,7 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 - Explain each line of code that matters. Label examples as demonstrations, not proof that every site is vulnerable.
 - Prefer simple diagrams that preserve one scenario and one action per step.
 - A new article that describes a process, a multi-actor interaction, or a decision chain should include at least one diagram by default—not as decoration, but as a planned carrier of the causal chain. Match the diagram type to the content shape: sequence diagram for multi-actor timelines, flowchart for branching decisions, table for parallel conditions. If a draft of such an article has no visual, the plan must justify why.
+- For multi-system comparison articles, plan one shared-workload diagram or early comparison surface plus a small per-system mechanism visual. An external interactive companion may deepen exploration, but it does not replace in-article carriers.
 - Use exact, reviewable SVG or Mermaid diagrams for labelled security flows; do not use text-heavy generative images.
 - Cite primary or authoritative sources (MDN, OWASP, standards) for browser behavior and security guidance.
 - When replacing or superseding an older article, audit its figures and diagrams as carefully as its prose. For each visual in the old article, decide explicitly: already covered by a better visual, deliberately dropped, or recreated in the new article.
@@ -102,6 +103,7 @@ Every article answers a question the reader is already asking. Open with the mom
 | Performance | "本文介绍浏览器渲染优化……" | "页面白屏 3 秒，用户已经走了" |
 | Refactoring | "今天讲如何拆分模块……" | "这段代码每次改动都牵出三个 bug" |
 | Debugging | "GC 日志格式如下……" | "服务每隔一小时卡顿一次，日志里只有一行警告" |
+| Comparison | "本报告对比三种并发模型……" | "同一个接口要扛 1 万并发下游调用，Go / Lua / Node 会在哪一步卡住？" |
 
 The pattern is the same: **concrete cost or confusion first, mechanism second.**
 
@@ -146,6 +148,13 @@ Do not write slogans that only make sense after the reader already understands t
 
 The problem is not technical terms themselves—"最终一致性" and "无状态服务" are fine because they are established industry terms. The problem is **author-coined shorthand** that compresses a causal claim into a slogan. If you invented the phrase for this article, expand it into actor + action + result.
 
+This also applies to checklist rows, defense tables, and arrow slogans. Prefer plain actor + action wording over compact notation the reader must decode.
+
+| Compressed | Expanded |
+|---|---|
+| "改成 ID→URL" | "改成只传 ID，由后台查表转成 URL" |
+| "服务端 ID 映射" | "前端只传短标识，服务端用内部表查出完整地址再跳" |
+
 If a sentence needs more than two technical terms, split it or move the precise definition to a toggle.
 
 ### 5. Metaphors are scaffolding, not the building
@@ -175,13 +184,68 @@ Readers assume protections are broader than they are. State the boundary explici
 | Block | Use it for | Do not use it for |
 |---|---|---|
 | Pull quote | A causal contrast the reader cares about | Restating a paragraph in fancier words |
-| Callout | A sharp boundary or warning | Decoration or ordinary emphasis |
-| Table | "Which one" or "under what condition" | Explaining "why" or "how" |
+| Callout | A sharp boundary or warning | Decsheets or ordinary emphasis |
+| Table | "Which one" or "under what condition" with **short cells** | Explaining "why" or "how"; dumping multi-model score lists into one cell |
+| Chart / ranked visual | Multi-item numeric comparison (scores, prices, latency) | Decorative screenshots that restate prose without a takeaway |
 | Columns | Genuine side-by-side comparison | Shortening a long section |
 | Divider | Separating major acts of the article | Between every H2 |
 | Toggle | Precise conditions, exceptions, derivations | Hiding the main causal chain |
 
-### 8. Review triggers
+### 7a. Reader prose is not the editorial workflow
+
+The published body is for the site reader. Do **not** leak writing-process or NotionNext workflow words into Callouts, Toggles, link parentheticals, or source blurbs.
+
+Forbidden in reader-facing prose unless the article is explicitly about this site's publishing system:
+
+- `Draft` / `Invisible` / `Published` as page-status jargon
+- `companion` / `staging` / 「预览向」 / 「工作流闸门」
+- notes like 「该文当前为 Invisible companion」
+
+Link related articles with a public `/article/<slug>` URL and, if needed, one reader-useful distinction (e.g. 「讲的是应用内二次确认，不是出站离开页」). Keep status and companion ownership in the plan, review notes, or metadata—not in the article body.
+
+### 7b. Callout / Toggle spacing and Notion rich-text pitfalls
+
+- Inside `<callout>` and `<details>`, do **not** use a lone `<br>` (or `<br>` on its own indented line) to separate paragraphs. Notion often renders that as a large empty block. Prefer one continuous paragraph, or separate indented child paragraphs **without** `<br>`.
+- Reserve `<br>` for true inline line breaks inside a single quote/callout line when the enhanced Markdown spec requires it—not as a paragraph spacer.
+- Avoid wrapping inline code in bold in ways that nest markers (e.g. `**\`includes\`**` inside an already-bold phrase). Notion can emit broken `****` artifacts. Put the code outside the bold span, or bold the surrounding words only.
+- Prefer code-fence languages the renderer knows. If a language such as `http` is remapped oddly, use `plain text` / `text` for raw HTTP transcripts.
+
+### 8. Multi-system comparison: same workload, early surface
+
+When the article's job is to compare ≥2 runtimes, languages, frameworks, or models, do not write three mini-essays and only then drop a summary table. That structure feels like a report even when the facts are correct.
+
+**Required pattern:**
+
+1. **One shared workload first.** Name the same request, failure, or job the reader will watch through every system (for example: “同一 API 打出 1 万个下游请求，中间夹着一段 CPU 计算”). Reuse those actors in every section.
+2. **Put a scannable comparison surface early**—short table, ranked chart, or side-by-side columns—after the opening scenario and before deep mechanism sections. Readers who came to choose need a map before the tour.
+3. **Per system: one causal beat + one diagram + one minimal same-workload snippet.** Do not open with encyclopedia headings like “核心概念 / 调度器 / 优势与场景”. Ask what that system does at the shared blocking or scheduling point.
+4. **Keep the strongest teaching device near the front.** If a metaphor, kitchen analogy, or decision checklist is the thing readers will remember, do not bury it after three siloed model write-ups.
+5. **Do not outsource the article's visual job to an external interactive page.** A link to `show.ximouzhao.com` or similar may be a companion, but the main article must still carry its own diagrams/tables for the causal chain. If the interactive page feels stronger, the blog is missing early compare, per-system mechanism visuals, or the shared workload—not merely “less polish”.
+6. **Subjective scores and radar charts need labels.** If you show capability scores, say they are illustrative rankings for teaching, not measured benchmarks, and state the axes' meaning next to the visual.
+
+**Hard fail pattern:** intro → System A deep dive → System B deep dive → System C deep dive → comparison table → metaphor → conclusion. That is a literature survey outline, not a comparison narrative.
+
+### 9. Make quantitative comparisons scannable
+
+Readers of model, price, benchmark, and latency articles arrive expecting a **visual ranking**, not a semicolon-separated score dump. Online comparisons commonly use bar charts, ranked strips, or one-number-per-cell matrices. Dense text inside a table cell fails the scan test.
+
+**Hard fail pattern** — never ship a cell or sentence like:
+
+> Claude Opus 5 max 63；GPT-5.6 Sol max 61；Grok 4.6 high 61；DeepSeek 0813 max 53
+
+That packs four named models, effort levels, and scores into one unreadably long unit. A reader cannot rank them at a glance.
+
+**Required treatment when comparing ≥3 numeric items of the same kind:**
+
+1. Prefer a **chart or ranked visual** as the primary carrier: Mermaid `xychart-beta` bar chart when axes are simple; otherwise a tracked SVG/PNG under `public/images/` with a caption that states the takeaway and the exact version/effort/date.
+2. Keep an adjacent **narrow exact-value table** only if needed: one model per row, one number per score cell, effort/version in its own short column or footnote.
+3. Always show the **comparison conditions next to the visual**: benchmark name, model snapshot, reasoning effort, date, and what the score does **not** mean.
+4. Price ladders follow the same rule: a visual order of magnitude first; exact unit prices in a short table second. Do not mix currencies in one visual without conversion labeling.
+5. If the plan claims a multi-model or multi-price comparison and has no chart/ranked visual, the plan must explicitly justify why a short one-number-per-cell table is enough.
+
+**Mobile rule:** a four-column table whose cells contain more than one model name or more than one number is almost always a major readability defect. Split it, chart it, or move the long text out of the cell.
+
+### 10. Review triggers
 
 If a reviewer says any of the following, apply the matching fix:
 
@@ -192,8 +256,10 @@ If a reviewer says any of the following, apply the matching fix:
 | "为什么要关心框架内部" | Perspective drift to mechanism | Show what breaks or slows down for the reader |
 | "这里不要提 X" | Mixed metaphor or unnecessary jargon | Remove metaphor, use plain mechanism name |
 | "全是话" | Prose that should be a table or list | Extract conditions into a table, keep one sentence of lead-in |
+| "谁能看清楚" / "网上不都是有很多图吗" | Multi-item numbers jammed into prose or one table cell | Replace with a bar/ranked chart plus a one-number-per-cell table; put version/effort beside the visual |
 | "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
-| "像规范摘要" | Missing scenario or evolution | Add a concrete story or show how the solution evolved under pressure |
+| "像规范摘要" / "像报告" / "本报告旨在" | Academic/report voice, missing scenario | Open with reader cost; cut report register; use question-driven headings |
+| "还没有交互页/对照页的号" / "不如图解页直观" | Comparison siloed, visuals outsourced, compare surface too late | Same shared workload; early compare table/chart; per-system diagram in-article; do not rely on an external show page |
 | "旧文的图更多 / 更直观" | Visual audit skipped during revision | Compare the old article's figures one by one; absorb, recreate, or deliberately drop each |
 | "这和已有那篇重复了" | Corpus overlap check skipped for a new article | Decide what the new article owns versus links to; refresh the existing article or narrow the new one's scope |
 
@@ -263,12 +329,16 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 - [ ] Every acronym and specialized term is defined before first reliance, normally where it first appears.
 - [ ] The article answers one question at a time and preserves the scenario.
 - [ ] The actors and complete causal chain remain traceable from the opening through the conclusion.
+- [ ] Multi-system comparisons reuse one shared workload, place a scannable compare surface early, and keep mechanism diagrams in-article rather than only on an external page.
 - [ ] Each recommended defense maps to a named failure condition and states its limits.
 - [ ] Each security claim has its conditions and limits.
 - [ ] Website-specific claims are either sourced or explicitly framed as a generic pattern.
 - [ ] Heading hierarchy is question-driven and reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
 - [ ] A concise causal conclusion appears before sources or deeper reading, which are not top-level narrative sections.
 - [ ] The page does not begin with `<table_of_contents/>`, a TOC screenshot, or a duplicate outline list.
+- [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」).
+- [ ] Callouts and Toggles have no lone `<br>` spacers that create large blank gaps.
+- [ ] Checklist and defense rows use plain actor + action wording, not author-coined arrow slogans such as `ID→URL`.
 - [ ] Main article and companion links use `https://ximouzhao.com/article/<slug>` and the intended NotionNext status.
 - [ ] Independent review has no blocker or major findings.
 - [ ] Invisible preview and Published status changes have the required separate user approvals.

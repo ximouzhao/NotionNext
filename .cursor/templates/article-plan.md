@@ -75,6 +75,7 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 
 - Opening Callout:
 - Mermaid / code / equations:
+- Charts / ranked visuals (≥3 comparable numbers):
 - Tables:
 - Toggles:
 - Columns:
