@@ -9,7 +9,9 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 
 - Status: draft | ready-for-review | approved | revise
 - User approval evidence:
-- Planning mode: parent-led | article-planner
+- Planning mode: parent-led (default) | article-planner (complex only)
+- Length budget: short | standard | long
+- Length justification (required if long):
 
 ## Objective
 
@@ -20,21 +22,28 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 - Scenario and actors:
 - In scope:
 - Out of scope:
+- Style anchor: https://ximouzhao.com/article/cors-and-csrf (narrative pattern only)
 
 ## Investigation Evidence
 
 - Related Notion pages:
 - Repository evidence:
 - Primary or authoritative sources:
+- Evidence as of:
+- Must re-fetch before Draft:
+- Evidence rechecked:
 - Unknowns / conflicting evidence:
 
 ## Claim Matrix
 
+Hard gate: no row → not writable in body. `low` / Unknown → not allowed in main conclusion.
+
 - Claim:
-  - Source:
+  - Source: URL or path:line
   - Conditions / exceptions:
-  - Confidence:
-  - Placement:
+  - Confidence: high | medium | low
+  - Allowed in main conclusion: yes | no
+  - Placement: main | toggle | companion | omit
 
 ## Terminology Dependency Order
 
@@ -49,7 +58,7 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 1. Heading:
    - Question answered:
    - Causal explanation:
-   - Evidence:
+   - Evidence (matrix rows):
    - Notion block:
 
 ## Defense / Failure Map
@@ -70,6 +79,7 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 
 - Concise causal recap:
 - Sources / deeper reading placement:
+- Claims excluded from main conclusion because low/unknown:
 
 ## Notion Design
 
@@ -107,6 +117,7 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 ## Review and Validation
 
 - Highest-risk claims:
+- Evidence spot-check focus:
 - Independent review focus:
 - Live enhanced Markdown specification checked:
 - Invisible preview checks:

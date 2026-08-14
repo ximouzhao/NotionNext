@@ -12,10 +12,42 @@ Write for readers who are curious but do not already know the terminology. Keep 
 - Planning only: `.cursor/workflows/article-plan-workflow.md`
 - Full Draft → review → Invisible preview → publication flow: `.cursor/workflows/article-workflow.md`
 - Supported Notion blocks: `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`
-- Saved-page and public-render verification: `../verify-notion-article/SKILL.md`
+- Browser-security terminology (topic appendix only): `./browser-security-terminology.md`
+- Editorial review: `article-reviewer` + `.cursor/checklists/article-review.md`
+- Mechanical verification (properties, blocks, links, Cover, public render): `../verify-notion-article/SKILL.md`
 - Cover upload: `../upload-notion-cover/SKILL.md`
 
-New or substantially revised articles require an approved plan before a Notion write. New pages start as `Draft`; substantial revisions of live articles use a staging copy. Preview, revision deployment, and publication are separate user approval gates.
+New or substantially revised articles require an approved plan before a Notion write. Default planning is parent-led with `article-researcher`; use `article-planner` only for complex work. Prefer `article-writer` for long drafts; short drafts may be parent-written. **Never skip research / Claim Matrix**—only writer/planner are optional. New pages start as `Draft`; substantial revisions of live articles use a staging copy. Preview, revision deployment, and publication are separate user approval gates.
+
+## Style anchor (golden sample)
+
+Primary narrative pattern to imitate:
+
+- Public article: [https://ximouzhao.com/article/cors-and-csrf](https://ximouzhao.com/article/cors-and-csrf)
+- What to copy: reader-first opening, stable actors, question-driven headings, end-to-end causal chain, explicit “does not do” boundaries, diagrams/tables that carry mechanism rather than decorate.
+- What not to copy blindly: CSRF/CORS metaphors and browser-security framing into unrelated topics. For comparisons or framework pieces, keep the same narrative discipline with a shared workload and early scannable surface.
+
+## Evidence hard gate
+
+Material claims are numbers, model IDs, prices, benchmarks, dates of effect, vendor-specific behavior, and mechanism assertions that a reader might act on.
+
+1. Every material claim in the body must appear in the plan Claim Matrix with a URL or `path:line` and `high` / `medium` / `low` confidence.
+2. No matrix row → do not write it into the body. Report the gap instead.
+3. `low` confidence or `Unknown` items must not drive the main conclusion or decision recommendation. Omit them, or confine them to an explicitly unverified Toggle/aside.
+4. Distinguish generic standards from one company's implementation. Do not claim knowledge of non-public APIs, fields, or controls.
+5. Before Draft for time-sensitive topics (pricing, model IDs, live API behavior, benchmarks), re-fetch the listed primary URLs and record `Evidence rechecked: YYYY-MM-DD`. Stale matrix rows are not writable until refreshed.
+
+## Length budget
+
+Record one budget in the plan and keep the draft inside it:
+
+| Budget | Narrative top-level H2 | Guidance |
+|---|---|---|
+| `short` | 3–5 | One bounded question; optional depth in one Toggle |
+| `standard` | 6–8 | Default. Prefer Toggles over a 9th H2 |
+| `long` | >8 only with justification | Requires companion split and/or heavy Toggles; main article still answers one question |
+
+Do not grow the main article by stacking encyclopedia sections. Move optional depth out.
 
 ## Core rules
 
@@ -23,10 +55,10 @@ New or substantially revised articles require an approved plan before a Notion w
 2. Introduce concepts in dependency order: observable behavior → plain-language explanation → formal name → exact mechanism and boundaries.
 3. On first use, write the Chinese name, English full name, abbreviation, and a one-sentence explanation.
    - Example: `CSRF（Cross-Site Request Forgery，跨站请求伪造）`
-   - Example: `同源策略（Same-Origin Policy，SOP）`
+   - Example: `依赖注入（Dependency Injection，DI）`
 4. Never rely on a definition from a distant section. A toggle, table row, or companion post must define the terms it uses.
-5. Replace vague claims with conditions. State who acts, what the browser or server checks, and when the behavior does or does not happen.
-6. Distinguish generic web standards from a specific company's implementation. Do not claim knowledge of non-public APIs, fields, or security controls.
+5. Replace vague claims with conditions. State who acts, what is checked, and when the behavior does or does not happen.
+6. Pass the evidence hard gate before any Notion write.
 
 ## Recommended main-article structure
 
@@ -43,16 +75,16 @@ Use this sequence unless the subject needs a materially different one:
 
 Keep the heading outline narrative (NotionNext builds the site TOC from these headings):
 
-- Use no more than 6–8 top-level headings.
+- Use no more than 6–8 top-level headings unless the plan explicitly budgets `long` and justifies companions/Toggles.
 - Use level-2 headings only for detail under the immediately preceding main question.
 - Do not make “References”, a code sample, or a minor aside a top-level section.
-- Treat CORS, browser edge cases, and advanced variants as extensions unless they are the main question.
+- Treat advanced variants as extensions unless they are the main question.
 - Do not place a Notion TOC block or outline image at the top; the site generates progress navigation automatically.
 
 ## Causal narrative and defenses
 
 - Make every main heading answer one reader question rather than merely name a topic.
-- Keep an end-to-end causal chain visible: actor → action or input → mechanism/check → observable result. For browser-security flows, explicitly separate whether the request can be sent, whether credentials can attach, whether the initiating script can read the response, and whether the server accepts the operation.
+- Keep an end-to-end causal chain visible: actor → action or input → mechanism/check → observable result. For browser-security flows, follow `./browser-security-terminology.md` (request / credentials / response readability / server acceptance).
 - Introduce each term before a later step relies on it. Do not make readers decode jargon while also learning the mechanism.
 - Map every recommended defense to the failure condition it prevents and state the conditions under which it works or fails.
 - Let examples, diagrams, tables, and checklists support the prose explanation; never use a rich block as a substitute for the causal chain.
@@ -61,22 +93,14 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 
 ## Terminology and rigor
 
-- Define `Origin` as `scheme + host + port`; say that paths are not part of an Origin.
-- Do not conflate **same-origin** with **same-site**, or either with Cookie matching.
-- When discussing Cookies, name the relevant attributes: `Domain`/host-only matching, `Path`, `Secure`, `HttpOnly`, and `SameSite`.
-- Explain `SameSite` as a Cookie attribute set through `Set-Cookie`. Define `Strict`, `Lax`, and `None; Secure` before relying on them.
-- When describing browser security, separate:
-  - whether a cross-site request can be sent;
-  - whether credentials can be attached;
-  - whether the initiating script can read the response.
-- When discussing CSRF, make clear that it commonly borrows automatic credentials; it does not require stealing the Cookie value.
-- Explain that CORS primarily controls browser-script access to cross-origin responses and Fetch/XHR permission paths; it is not general CSRF protection.
-- State important boundaries, such as XSS defeating a Token that a same-origin script can read.
+- Keep definitions local and ordered; do not make readers decode jargon while learning the mechanism.
+- Say what a mechanism does **not** do once the positive claim is clear.
+- For browser-security articles only, also follow `./browser-security-terminology.md`. Do not apply that appendix's CSRF/CORS framing to unrelated subjects.
 
 ## Examples, figures, and sources
 
-- Use reserved example domains such as `pay.example.com` and `evil.example`; never include real payment endpoints or claim a real provider uses a specific hidden field.
-- Explain each line of code that matters. Label examples as demonstrations, not proof that every site is vulnerable.
+- Prefer reserved example domains (`pay.example.com`, `evil.example`, `api.example.com`) over real customer endpoints.
+- Explain each line of code that matters. Label examples as demonstrations when they are not universal proof.
 - Prefer simple diagrams that preserve one scenario and one action per step.
 - A new article that describes a process, a multi-actor interaction, or a decision chain should include at least one diagram by default—not as decoration, but as a planned carrier of the causal chain. Match the diagram type to the content shape: sequence diagram for multi-actor timelines, flowchart for branching decisions, table for parallel conditions. If a draft of such an article has no visual, the plan must justify why.
 - For multi-system comparison articles, plan one shared-workload diagram or early comparison surface plus a small per-system mechanism visual. An external interactive companion may deepen exploration, but it does not replace in-article carriers.
@@ -277,7 +301,7 @@ If a reviewer says any of the following, apply the matching fix:
    Start the body with the opening scenario / callout, then the first real section heading.
 7. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`. A companion may have narrow scope, but it must remain locally understandable and must not own a definition essential to the main article unless the main article already established it.
 8. Link companion pages with the public site route `https://ximouzhao.com/article/<slug>` (for example `https://ximouzhao.com/article/cors-and-csrf`). Never use `https://blog.ximouzhao.com/...` (origin-only host), bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
-9. After writing, fetch the page and run `verify-notion-article`; Notion UI correctness does not prove NotionNext rendering.
+9. After writing, confirm the Claim Matrix still covers every material body claim, clear independent `article-reviewer` findings (including evidence spot-check), then run `verify-notion-article` for mechanical and public-render checks. Notion UI correctness does not prove NotionNext rendering; verify does not replace editorial review.
 10. Treat `Draft`, `Invisible`, and the site's article password as workflow/UI controls, not confidentiality boundaries. Never store confidential material in this site database.
 11. Use `Invisible` only after explicit approval for public-site preview.
 12. Set a main article to `Published` only after a separate explicit publication approval.
@@ -325,13 +349,15 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 
 ## Pre-publication review
 
-- [ ] The first screen explains why the reader should care.
+- [ ] The first screen explains why the reader should care and follows the golden-sample narrative pattern.
+- [ ] Claim Matrix covers every material body claim; evidence was spot-checked; `low`/`Unknown` items are out of the main conclusion.
+- [ ] Time-sensitive facts show a current `Evidence as of` / recheck date.
+- [ ] The draft stays inside the planned length budget.
 - [ ] Every acronym and specialized term is defined before first reliance, normally where it first appears.
 - [ ] The article answers one question at a time and preserves the scenario.
 - [ ] The actors and complete causal chain remain traceable from the opening through the conclusion.
 - [ ] Multi-system comparisons reuse one shared workload, place a scannable compare surface early, and keep mechanism diagrams in-article rather than only on an external page.
 - [ ] Each recommended defense maps to a named failure condition and states its limits.
-- [ ] Each security claim has its conditions and limits.
 - [ ] Website-specific claims are either sourced or explicitly framed as a generic pattern.
 - [ ] Heading hierarchy is question-driven and reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
 - [ ] A concise causal conclusion appears before sources or deeper reading, which are not top-level narrative sections.

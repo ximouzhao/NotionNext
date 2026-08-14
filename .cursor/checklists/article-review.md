@@ -20,9 +20,11 @@ This is the canonical criteria list for `article-reviewer`.
 
 ## Evidence
 
-- [ ] Material claims map to primary or authoritative sources.
-- [ ] Sources actually support the nearby claim.
-- [ ] Time-sensitive behavior is qualified and current enough.
+- [ ] Material claims map to Claim Matrix rows with primary or authoritative sources (URL or `path:line`).
+- [ ] Sources were opened and actually support the nearby claim (spot-check, not citation theater).
+- [ ] Numbers, model IDs, prices, benchmarks, and vendor-specific behaviors in the body all have matrix rows.
+- [ ] `low` confidence or Unknown items do not drive the main conclusion or decision path.
+- [ ] Time-sensitive behavior is qualified with a current `Evidence as of` / recheck date.
 - [ ] Repository-specific claims have `path:line` evidence where practical.
 - [ ] Unverified company-specific behavior is not presented as fact.
 
@@ -48,6 +50,8 @@ This is the canonical criteria list for `article-reviewer`.
 Classify readability and structure findings by reader impact: use `major` when the target reader cannot follow the main question or mechanism, `minor` for localized clarity or flow defects, and `nit` for optional style preferences.
 
 ## Notion and publishing hygiene
+
+Surface these when visible on the fetched page. Full Cover upload, Invisible/Published route, and aggregation checks belong to `verify-notion-article` after this editorial gate clears.
 
 - [ ] Required metadata is complete and the slug is unique.
 - [ ] Status matches the current workflow gate.

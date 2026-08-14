@@ -5,13 +5,15 @@ Do not declare the article workflow complete until every applicable item is sati
 ## Plan and scope
 
 - [ ] Approved plan path is recorded, or localized direct-edit authorization is recorded.
-- [ ] The final article stays within the approved scope.
-- [ ] Research evidence and unresolved assumptions are recorded.
+- [ ] Claim Matrix (or equivalent research) exists; research was not skipped for a substantial article.
+- [ ] The final article stays within the approved scope and length budget.
+- [ ] Research evidence, `Evidence as of` / recheck dates, and unresolved assumptions are recorded.
 
 ## Notion Draft
 
 - [ ] The destination schema was fetched immediately before writing.
 - [ ] The current Notion enhanced Markdown specification was read before generating content.
+- [ ] Time-sensitive sources were re-fetched before Draft when the plan required it.
 - [ ] Title, type, status, slug, summary, date, category, and tags are correct.
 - [ ] The saved page was fetched after writing.
 - [ ] Unrelated existing content and properties were preserved.
@@ -19,7 +21,8 @@ Do not declare the article workflow complete until every applicable item is sati
 
 ## Review
 
-- [ ] An independent article reviewer inspected the fetched page.
+- [ ] An independent article reviewer inspected the fetched page (editorial gate).
+- [ ] Evidence spot-check passed (matrix coverage + sources support nearby claims).
 - [ ] No blocker or major findings remain.
 - [ ] Review-driven changes were fetched and revalidated.
 - [ ] Remaining minor and nit findings are recorded with the user's decision.
@@ -33,6 +36,12 @@ Do not declare the article workflow complete until every applicable item is sati
 - [ ] A concise causal conclusion appears before sources or deeper reading.
 - [ ] Companion pages remain locally understandable and do not outsource essential definitions.
 - [ ] Independent review classified readability and structure findings by reader impact.
+- [ ] Draft stays inside the planned length budget.
+
+## Mechanical verification
+
+- [ ] `verify-notion-article` passed for the current stage (properties, blocks, links, Cover, public render as applicable).
+- [ ] Verify was not used as a substitute for independent editorial review.
 
 ## Cover
 

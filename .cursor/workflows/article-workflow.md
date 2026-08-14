@@ -4,7 +4,7 @@ This is the end-to-end workflow for writing, substantially revising, previewing,
 
 ## Objective
 
-Deliver a technically rigorous, readable, and structurally coherent Notion article whose scenario, actors, causal chain, conclusion, metadata, rich blocks, links, Cover, and public rendering have been verified. The workflow is not complete merely because a Notion page exists.
+Deliver a technically rigorous, readable, and evidence-backed Notion article. Editorial quality and Claim Matrix spot-checks are gated by `article-reviewer`; metadata, blocks, links, Cover, and public rendering are gated by `verify-notion-article`. The workflow is not complete merely because a Notion page exists.
 
 ## Quick start
 
@@ -17,41 +17,54 @@ For ordinary chat, the same intent also triggers `notion-technical-writing`; the
 ## Phase 1 — Choose the path
 
 - **New or substantial article**: run the full planning path.
-- **Localized correction**: the user may authorize a direct edit; still fetch the current page first, preserve unrelated content, review the resulting scope, and verify it.
+- **Localized correction**: the user may authorize a direct edit; still fetch the current page first, preserve unrelated content, review the resulting scope, and verify it. Even localized edits that change material facts need a mini Claim Matrix row.
 - **Review only**: fetch and report findings; make no mutations.
 
 For the full path, follow `article-plan-workflow.md` and wait for explicit approval of the plan.
 
 ## Phase 2 — Research and plan
 
-Use `article-researcher` for evidence gathering. Use `article-planner` for security-sensitive, unfamiliar, multi-page, or structurally complex work. The parent owns the artifact at `.tmp/article-plans/<timestamp>-<slug>.md`.
+**Research is mandatory** for every new or substantial article. Use `article-researcher` (or an equivalent parent-produced Claim Matrix with the same fields). You may skip `article-writer` or `article-planner`; you may **not** skip research.
+
+**Default path (standard article):** parent-led planning with `article-researcher`. Do not start `article-planner` by default.
+
+**Complex path only:** use `article-planner` when the work is security-sensitive, unfamiliar, multi-page/series, has competing technical interpretations, or needs significant codebase investigation. The planner must obtain focused research evidence (or ask the parent to supply it).
+
+The parent owns the artifact at `.tmp/article-plans/<timestamp>-<slug>.md`.
 
 The approved plan must define:
 
 - audience, main question, scenario, and scope;
+- length budget (`short` | `standard` | `long`);
+- Claim Matrix with URL or `path:line`, confidence, and whether each claim may enter the main conclusion;
+- `Evidence as of` date and, for time-sensitive topics, URLs that must be re-fetched before Draft;
 - terminology dependency order;
 - an end-to-end causal chain;
 - question-driven heading narrative;
 - defense-to-failure mapping where applicable;
 - concise conclusion and non-narrative source placement;
-- claims and authoritative sources;
 - main versus companion-page ownership without outsourcing essential definitions;
 - Notion block choices;
 - metadata and intended final status;
 - validation and Cover requirements.
+
+**Evidence hard gate:** no Claim Matrix row → that fact cannot appear in the body. `low` / `Unknown` cannot drive the main conclusion.
 
 ## Phase 3 — Draft
 
 1. Fetch the data source immediately before writing.
 2. Read the current `notion://docs/enhanced-markdown-spec` MCP resource immediately before generating Notion content. Apply the stricter rule wherever it differs from the repository capability matrix.
 3. Confirm the slug is stable and unique.
-4. Ask `article-writer` for Notion-flavored Markdown based only on the approved plan and evidence, following the causal-narrative and readability rules in `.cursor/skills/notion-technical-writing/SKILL.md`.
-5. The parent creates or updates the page through the Notion MCP.
-6. New pages use:
+4. For pricing, model IDs, live API behavior, or benchmarks, re-fetch the plan's listed primary URLs and record `Evidence rechecked: YYYY-MM-DD` before drafting. Do not write from stale matrix rows.
+5. Produce Notion-flavored Markdown from the approved plan and evidence, following `.cursor/skills/notion-technical-writing/SKILL.md` (golden sample, evidence hard gate, length budget).
+   - **Default for long or complex drafts:** ask `article-writer` (read-only) so drafting stays isolated from Notion mutations.
+   - **Allowed shortcut for short, bounded drafts:** the parent may draft directly from the skill without `article-writer`, but still only from the Claim Matrix. Never skip independent review afterward.
+6. The parent creates or updates the page through the Notion MCP. Subagents do not publish.
+7. New pages use:
    - `type=Post`;
    - `status=Draft`;
    - complete title, slug, summary, date, category, and tags.
-7. Fetch the saved page and compare it with the intended structure.
+8. Fetch the saved page and compare it with the intended structure and Claim Matrix.
 
 For a substantial revision of an existing `Published` article:
 
@@ -64,26 +77,16 @@ A localized live edit may update the original page only after the user accepts i
 
 ## Phase 4 — Independent review loop
 
-Run `article-reviewer` in a fresh context against the fetched page, approved plan, claim evidence, data source schema, and relevant repository constraints.
-
-Review categories:
-
-- correctness;
-- completeness;
-- evidence;
-- readability;
-- structure;
-- risk;
-- publishing hygiene.
+Run `article-reviewer` in a fresh context against the fetched page, approved plan, Claim Matrix, data source schema, and relevant repository constraints. This is the **editorial** gate (correctness, evidence spot-check, causal narrative, readability, structure, risk).
 
 Severity controls the gate:
 
 - `blocker` and `major`: must be fixed before preview or publication;
 - `minor` and `nit`: remain visible and may be accepted by the user.
 
-Apply severity by reader impact to readability and structure findings: a broken causal explanation or undefined essential concept can be `major`; a localized flow or heading issue is normally `minor`.
+Apply severity by reader impact to readability and structure findings: a broken causal explanation or undefined essential concept can be `major`; a localized flow or heading issue is normally `minor`. Failed evidence spot-checks, unsupported material claims, and stale time-sensitive facts are `major` or worse.
 
-After each review-driven change, fetch the page and rerun verification before a new independent review. Stop after three rounds and ask the user whether to accept remaining non-blocking findings or continue. Never let the writer approve its own draft.
+After each review-driven change, fetch the page. Re-run `article-reviewer` for editorial regressions when the change touches claims, structure, or narrative. Run `verify-notion-article` for **mechanical** checks (properties, blocks, links, Cover, stage rendering)—do not ask verify to re-judge pedagogy or evidence. Stop after three rounds and ask the user whether to accept remaining non-blocking findings or continue. Never let the writer approve its own draft.
 
 ## Phase 5 — Cover
 
@@ -105,7 +108,7 @@ The tracked file is the version-controlled source used by the site; the attached
 2. Obtain explicit approval to change `Draft` to `Invisible`.
 3. Verify `https://ximouzhao.com/article/<slug>` after cache propagation.
 4. Check desktop and narrow layouts, light and dark themes when practical, TOC, Mermaid, equations, code, tables, Toggles, images, captions, embeds, and internal links.
-5. Resolve preview defects and repeat content verification.
+5. Resolve preview defects and repeat mechanical verification (`verify-notion-article`). Re-run `article-reviewer` only if the fix changes claims, structure, or narrative.
 
 Do not place confidential material in this site database. Use a genuinely access-controlled workspace or implement server-side authorization before storing content that requires confidentiality.
 

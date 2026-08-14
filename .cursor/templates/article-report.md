@@ -17,12 +17,15 @@ Use this template for `.tmp/article-reports/<timestamp>-<slug>.md`. Report obser
 
 - Plan path:
 - Planning mode:
+- Length budget:
 - User approved plan:
 - Approved scope:
 
 ## Research and Writing
 
 - Primary evidence used:
+- Evidence as of / rechecked:
+- Claim Matrix path or embedded:
 - Existing pages compared:
 - Enhanced Markdown specification checked:
 - Draft created or revised:
@@ -34,6 +37,7 @@ Use this template for `.tmp/article-reports/<timestamp>-<slug>.md`. Report obser
 
 - Reviewer used:
 - Rounds:
+- Evidence spot-check:
 - Final decision:
 - Blocker / major findings resolved:
 - Remaining minor / nit findings:

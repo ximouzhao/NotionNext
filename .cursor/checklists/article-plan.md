@@ -9,14 +9,18 @@ The plan is not ready for approval until every applicable item is answered.
 - [ ] The intended reader outcome is observable.
 - [ ] In-scope and out-of-scope topics are listed.
 - [ ] A concrete scenario and stable actors are defined.
+- [ ] Length budget is `short`, `standard`, or justified `long`.
 
-## Investigation
+## Investigation and evidence hard gate
 
+- [ ] `article-researcher` (or equivalent Claim Matrix) was produced; research was not skipped.
 - [ ] The destination data source schema was fetched.
 - [ ] Related Notion articles and possible companion pages were inspected.
 - [ ] Repository behavior was inspected where implementation-specific claims are planned.
-- [ ] Material claims have primary or authoritative sources.
-- [ ] Conditions, exceptions, confidence, and unresolved questions are recorded.
+- [ ] Every material claim has a Claim Matrix row with URL or `path:line`.
+- [ ] Confidence and `Allowed in main conclusion` are set; `low` / Unknown cannot drive the main conclusion.
+- [ ] `Evidence as of` is recorded; time-sensitive topics list pre-Draft re-fetch URLs.
+- [ ] Conditions, exceptions, and unresolved questions are recorded.
 - [ ] Generic standards are separated from company- or project-specific behavior.
 
 ## Structure
@@ -28,10 +32,11 @@ The plan is not ready for approval until every applicable item is answered.
 - [ ] The main article owns a bounded question.
 - [ ] Optional depth is assigned to Toggles or companion posts without outsourcing definitions essential to the main article.
 - [ ] Intentionally short companion pages remain locally understandable and define the terms they use.
-- [ ] There are no more than 6–8 narrative top-level headings.
+- [ ] Narrative H2 count matches the length budget (prefer Toggles over extra H2s).
 - [ ] A concise causal conclusion is planned before sources or deeper reading.
 - [ ] Sources are outside the top-level narrative.
 - [ ] The outline does not include a manual table of contents.
+- [ ] The outline follows the golden-sample narrative pattern without copying unrelated security framing.
 
 ## Notion and delivery
 

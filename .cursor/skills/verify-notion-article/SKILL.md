@@ -1,18 +1,20 @@
 ---
 name: verify-notion-article
-description: Verifies Notion technical articles for metadata, content structure, supported blocks, links, Cover state, review gates, and NotionNext rendering. Use after writing or revising a Draft, before and after Invisible preview, and after publication.
+description: Mechanically verifies a saved Notion article for properties, supported blocks, links, Cover state, workflow stage, and NotionNext public rendering. Use after writing or revising a Draft, before and after Invisible preview, and after publication. Editorial judgment belongs to article-reviewer, not this skill.
 ---
 
 # Verify Notion Article
 
-Verify the saved page, not the writer's draft. Do not change content or status while running this skill.
+Verify the **saved** page, not the writer's draft. Do not change content or status while running this skill.
+
+This skill is **mechanical QA**. It does not re-judge causal narrative, terminology pedagogy, evidence strength, or readability. Those gates belong to `article-reviewer` and `.cursor/checklists/article-review.md`. Before Invisible preview or publication, confirm that independent review has no open `blocker` or `major` findings; do not re-run that editorial checklist here.
 
 ## Inputs
 
 - Notion page URL or ID;
 - intended slug and workflow stage: `Draft`, `Invisible`, or `Published`;
-- approved plan path when available;
-- expected companion links and Cover requirement.
+- expected companion link slugs and Cover requirement;
+- latest independent review decision when available (`Ready for next gate` or open findings).
 
 ## Setup
 
@@ -26,44 +28,33 @@ If authentication or permission is definitively denied, report it once and stop.
 
 ## Checks common to every stage
 
+### Review gate (pointer only)
+
+- Record whether the latest independent review is `Ready for next gate` with no open `blocker`/`major`.
+- If review is missing or still has `blocker`/`major`, Decision is `Fail` or `Blocked` for preview/publication stages. Do not invent editorial findings; cite the review result.
+
 ### Properties
 
 - `type=Post`;
 - status equals the requested stage;
 - title and slug are non-empty;
 - slug is stable, URL-safe, and unique;
-- summary accurately describes the reader outcome;
+- summary is non-empty and matches the intended reader outcome at a glance (empty or obviously wrong slug/title/summary is a mechanical fail; nuanced summary quality is reviewer work);
 - date, category, and tags use valid data-source options;
 - any article password is treated only as a UI gate, not a confidentiality control;
 - companion pages have stable slugs and the intended `Invisible` status.
 
 Draft is a valid workflow value and is excluded from normal `allPages` discovery, but UUID fallback routes can bypass that listing filter. Draft content must not be confidential.
 
-### Content
-
-- first screen establishes a concrete problem or scenario, identifiable actors, and why it matters;
-- specialized terms and acronyms are defined before first reliance, normally at first use;
-- terms appear in dependency order before later sections rely on them;
-- a complete causal chain is traceable from actors and inputs through mechanisms or checks to observable results, or its absence is justified;
-- headings answer reader questions and form a causal narrative with no duplicate manual TOC;
-- code, diagrams, tables, Toggles, Callouts, and checklists support rather than replace the explanation;
-- recommended defenses map to named failure conditions and state their limits;
-- material claims state conditions and limits;
-- standards and implementation-specific claims are separated;
-- a concise causal conclusion appears before sources or deeper reading;
-- sources and deeper reading do not interrupt the top-level narrative;
-- companion pages may be short but remain locally understandable, and the main article does not outsource essential definitions;
-- sources are primary or authoritative and support the associated claims.
-
 ### Blocks
 
 - block choices are listed as supported in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`;
 - Mermaid language is lowercase `mermaid`;
-- Toggle children are indented and locally understandable;
+- Toggle children are indented;
 - tables contain short rich text and are not excessively wide;
-- multi-item numeric comparisons do not pack multiple models/scores into one cell; charts or ranked visuals are present when ≥3 comparable numbers are the point;
-- equations have plain-language explanations;
-- images have captions or adjacent explanatory text;
+- multi-item numeric comparisons do not pack multiple models/scores into one cell; a chart or ranked visual exists when ≥3 comparable numbers are the point;
+- equations, images, and embeds are present as intended without unknown block types;
+- images have captions or adjacent text when the plan required them;
 - no critical content depends on an unknown block, unshared synced block, or unsupported link preview;
 - no manual `<table_of_contents/>` exists.
 
@@ -82,7 +73,7 @@ Draft is a valid workflow value and is excluded from normal `allPages` discovery
 
 - Confirm the canonical slug remains excluded from normal public discovery; a slug-route 404 is expected.
 - Record that UUID access may still succeed and therefore Draft is not a privacy boundary.
-- Review the Notion content, properties, evidence, and rich-block structure.
+- Confirm properties, blocks, and links against the checks above.
 - Do not report missing public rendering as a defect.
 - Do not change to `Invisible` without explicit approval.
 
@@ -109,16 +100,13 @@ Draft is a valid workflow value and is excluded from normal `allPages` discovery
 - Page:
 - Stage:
 - Decision: Pass | Fail | Blocked
+- Independent review gate: Ready | Open blocker/major | Not run
 - Blocking issues:
 - Warnings:
 
 ## Properties
 
 - Check: Pass / Fail — evidence
-
-## Content and Evidence
-
-- Check: Pass / Fail — section anchor
 
 ## Blocks and Links
 
@@ -141,4 +129,4 @@ Draft is a valid workflow value and is excluded from normal `allPages` discovery
 1. Action or `None`.
 ```
 
-`Pass` requires no unresolved blocker or major review finding and all checks applicable to the current stage. Keep warnings visible.
+`Pass` requires the independent review gate to be clear for the current stage (or an explicit user waiver for localized edits), plus all mechanical checks applicable to that stage. Keep warnings visible. Do not expand this skill back into editorial review.

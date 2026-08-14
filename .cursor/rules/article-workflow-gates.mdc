@@ -9,6 +9,7 @@ Apply these gates only when a request creates, substantially revises, previews, 
 
 - Read `.cursor/skills/notion-technical-writing/SKILL.md` and the relevant workflow before writing.
 - New articles, security-sensitive articles, and multi-page series require a written plan and explicit approval before a Notion page is created or substantially replaced.
+- Substantial articles require a Claim Matrix (research). Do not invent material numbers, model IDs, prices, benchmarks, or vendor-specific behavior; `low`/`Unknown` claims must not drive the main conclusion.
 - New pages default to `type=Post` and `status=Draft`.
 - Substantial revisions of `Published` pages use a separate Draft staging copy. Deploying reviewed content to the canonical page is a distinct approval gate.
 - The parent owns Notion mutations; planning, research, writing, and review agents do not publish.
