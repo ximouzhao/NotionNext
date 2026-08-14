@@ -83,8 +83,10 @@ Hard gate: no row → not writable in body. `low` / Unknown → not allowed in m
 
 ## Notion Design
 
+- Prefer visuals: Yes | No (if No, justify)
 - Opening Callout:
 - Mermaid / code / equations:
+- Stage / evolution visuals (if applicable):
 - Charts / ranked visuals (≥3 comparable numbers):
 - Tables:
 - Toggles:

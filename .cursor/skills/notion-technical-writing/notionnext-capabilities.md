@@ -61,7 +61,9 @@ Use Notion `<table>` syntax with `header-row="true"` for compact comparisons. Ce
 
 Use fenced code blocks with the exact language. Explain consequential lines in the narrative.
 
-Mermaid is supported by `components/PrismMac.js` only when the code block produces the `language-mermaid` class. The site default CDN is Mermaid **11.4.0** (`conf/code.config.js`), which supports `flowchart`, `sequenceDiagram`, and `xychart-beta`.
+Mermaid is supported by `components/PrismMac.js` only when the code block produces the `language-mermaid` class. The site default CDN is Mermaid **11.4.0** (`conf/code.config.js`).
+
+**Confirmed on the public route:** `flowchart`, `sequenceDiagram`, and `xychart-beta`. Prefer these unless you have verified another type on `ximouzhao.com`. Unconfirmed types (including `timeline`, `gantt`, `stateDiagram`) are allowed only after public-route verification; otherwise fall back to flowchart / sequence / table / tracked SVG.
 
 ````markdown
 ```mermaid

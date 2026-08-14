@@ -37,6 +37,7 @@ This is the canonical criteria list for `article-reviewer`.
 - [ ] For browser-security flows, request sending, credential attachment, response readability, and server acceptance are separated where applicable.
 - [ ] Non-browser-security articles do not smuggle CSRF/CORS/SOP framing, metaphors, or default cors-and-csrf related reading; any boundary cut is at most one sentence + link.
 - [ ] Main headings answer reader questions rather than merely label topics.
+- [ ] Relationships, mechanisms, comparisons, rankings, and multi-step evolutions use planned visuals rather than prose-only walls (or the plan explicitly justifies prose-only).
 - [ ] Code, diagrams, tables, Toggles, and Callouts support rather than replace explanation.
 - [ ] Multi-item numeric comparisons (≥3 scores, prices, or latencies of the same kind) use a chart or ranked visual plus short one-number-per-cell tables; no semicolon-joined score dumps in a cell or sentence.
 - [ ] Chart captions or adjacent prose state benchmark/version/effort/date and what the number does not mean.

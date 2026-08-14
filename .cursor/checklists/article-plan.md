@@ -40,10 +40,11 @@ The plan is not ready for approval until every applicable item is answered.
 
 ## Notion and delivery
 
-- [ ] Every proposed rich block has an explanatory purpose.
+- [ ] Relationships, mechanisms, comparisons, rankings, and multi-step evolutions budget a visual (or the plan explicitly justifies prose-only).
+- [ ] Every proposed rich block has an explanatory purpose; diagram type is chosen for clarity, not by a fixed mapping.
 - [ ] Multi-model or multi-price comparisons budget a chart/ranked visual (Mermaid `xychart-beta` or tracked image); if skipped, the plan justifies a short one-number-per-cell table.
 - [ ] No planned table cell packs multiple models or multiple scores into one unreadably long string.
-- [ ] All proposed blocks exist in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md`.
+- [ ] All proposed blocks exist in `.cursor/skills/notion-technical-writing/notionnext-capabilities.md` (unconfirmed Mermaid types need public-route verification or a fallback).
 - [ ] Title, slug, summary, date, category, tags, Cover concept, and intended status are proposed.
 - [ ] Canonical and companion links use `/article/<slug>`.
 - [ ] Content review, Invisible preview, and publication checks are defined.

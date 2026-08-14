@@ -111,16 +111,33 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 
 ## Examples, figures, and sources
 
+### Prefer visuals aggressively
+
+Default posture: **if a section teaches a relationship, mechanism, comparison, ranking, or multi-step change, plan a visual first and let prose annotate it.** Do not wait for review to say “这里全是话 / 网上不都是有很多图吗”. A wall of accurate prose that a diagram or chart would have carried is a planning defect.
+
+Bias toward visuals when the reader must hold any of these in working memory:
+
+- multi-actor or multi-hop causal chains
+- before → after / stage-by-stage evolution (attack–defense, architecture iterations, product UX changes)
+- branching decisions or failure conditions
+- side-by-side system or model comparisons
+- ≥3 comparable numbers (scores, prices, latency)
+
+Still forbid decoration: every visual must have a named job in the plan (comparison, mechanism loop, stage map, ranking, boundary warning). Prefer Mermaid or a tracked SVG/PNG under `public/images/`; verify on the public NotionNext route. See `notionnext-capabilities.md` for currently confirmed Mermaid types—unlisted types are allowed only after public-route verification, otherwise fall back to flowchart / sequence / table / SVG.
+
+### Figures and sources
+
 - Prefer reserved example domains (`pay.example.com`, `evil.example`, `api.example.com`) over real customer endpoints.
 - Explain each line of code that matters. Label examples as demonstrations when they are not universal proof.
 - Prefer simple diagrams that preserve one scenario and one action per step.
-- A new article that describes a process, a multi-actor interaction, or a decision chain should include at least one diagram by default—not as decoration, but as a planned carrier of the causal chain. Match the diagram type to the content shape: sequence diagram for multi-actor timelines, flowchart for branching decisions, table for parallel conditions. If a draft of such an article has no visual, the plan must justify why.
+- A new article that describes a process, multi-actor interaction, decision chain, evolution, or comparison should include at least one diagram or chart by default—not as decoration, but as a planned carrier of the explanation. If such a draft has no visual, the plan must justify why.
+- Match diagram type to content shape (guidance, not a single mandated mapping): sequence for multi-actor request timelines; flowchart for branching decisions; table for parallel conditions; chart / ranked visual for numeric ladders; timeline, LR stage flowchart, or short stage table for chronological / evolutionary arcs—pick whichever carries the beat most clearly on this site.
 - For multi-system comparison articles, plan one shared-workload diagram or early comparison surface plus a small per-system mechanism visual. An external interactive companion may deepen exploration, but it does not replace in-article carriers.
 - Use exact, reviewable SVG or Mermaid diagrams for labelled security flows; do not use text-heavy generative images.
 - Cite primary or authoritative sources (MDN, OWASP, standards) for browser behavior and security guidance.
 - When replacing or superseding an older article, audit its figures and diagrams as carefully as its prose. For each visual in the old article, decide explicitly: already covered by a better visual, deliberately dropped, or recreated in the new article.
 - For a new article, audit the existing corpus instead: search for related and companion articles, decide what the new article owns versus links to, and reuse or refresh existing explanations and diagrams rather than creating a parallel version.
-- Budget visuals at plan time, not as decoration after the draft is written. For each planned rich block (diagram, table, callout, columns), name the job it does—comparison, mechanism loop, boundary warning. A block without a job does not belong in the plan.
+- Budget visuals at plan time, not as decoration after the draft is written. For each planned rich block (diagram, table, callout, columns), name the job it does. A block without a job does not belong in the plan.
 - Mechanisms with a generate → distribute → verify loop (Token flows, handshakes, challenge-response) are strong diagram candidates; a small Mermaid diagram can replace a dense prose paragraph.
 - Never reference another page's Notion-hosted image by its signed URL; signed URLs expire. Recreate the diagram as Mermaid or a tracked asset under `public/images/` instead.
 - A new diagram should replace dense prose, not stack on top of it. If the page already carries many rich blocks, adding one more means removing something.
@@ -153,7 +170,7 @@ Abstract mechanisms are easier to accept when the reader watches them solve a co
 - Performance: "用户点开列表页，接口返回 2MB JSON，前端渲染 4000 个节点，白屏 3 秒"
 - Refactoring: "运营要加一个导出按钮，你发现这段 800 行的函数里已经塞了 6 个不相关的功能"
 
-**Evolution / attack-defense progression (when the topic has history or opposition):** Show how the solution evolved under pressure. Each step should answer: what new requirement or attack appeared, why the old approach broke, and what the next iteration changed.
+**Evolution / attack-defense progression (when the topic has history or opposition):** Show how the solution evolved under pressure. Each step should answer: what new requirement or attack appeared, why the old approach broke, and what the next iteration changed. Prefer a visual stage map for the arc (timeline, LR flowchart, or short stage table—whichever is clearest); do not leave a multi-step evolution as prose-only by default.
 
 - Security: 攻击者找到新绕过方式 → 防线打补丁 → 攻击者再进化 → 防线再调整
 - Architecture: 需求 A 导致实现 X → 需求 B 出现，X 撑不住 → 演进为 Y → 需求 C 又暴露 Y 的边界
@@ -292,8 +309,8 @@ If a reviewer says any of the following, apply the matching fix:
 | "为什么要关心框架内部" | Perspective drift to mechanism | Show what breaks or slows down for the reader |
 | "这里不要提 X" | Mixed metaphor or unnecessary jargon | Remove metaphor, use plain mechanism name |
 | "为什么又提 CSRF" / "无关文串 CSRF" | Style-sample contamination from cors-and-csrf | Delete CSRF/CORS framing; keep narrative discipline only; boundary cut = one sentence + link max |
-| "全是话" | Prose that should be a table or list | Extract conditions into a table, keep one sentence of lead-in |
-| "谁能看清楚" / "网上不都是有很多图吗" | Multi-item numbers jammed into prose or one table cell | Replace with a bar/ranked chart plus a one-number-per-cell table; put version/effort beside the visual |
+| "全是话" | Prose carrying a relationship that needs a visual | Add diagram/chart/table that owns the mechanism or comparison; cut the duplicated prose |
+| "谁能看清楚" / "网上不都是有很多图吗" | Under-visualized explanation, or numbers jammed into prose/cells | Prefer a diagram or ranked chart early; for ≥3 numbers use chart + one-number-per-cell table |
 | "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
 | "像规范摘要" / "像报告" / "本报告旨在" | Academic/report voice, missing scenario | Open with reader cost; cut report register; use question-driven headings |
 | "还没有交互页/对照页的号" / "不如图解页直观" | Comparison siloed, visuals outsourced, compare surface too late | Same shared workload; early compare table/chart; per-system diagram in-article; do not rely on an external show page |
@@ -370,6 +387,7 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 - [ ] Every acronym and specialized term is defined before first reliance, normally where it first appears.
 - [ ] The article answers one question at a time and preserves the scenario.
 - [ ] The actors and complete causal chain remain traceable from the opening through the conclusion.
+- [ ] Relationships, mechanisms, comparisons, rankings, and multi-step evolutions have planned visuals (or an explicit plan justification for prose-only).
 - [ ] Multi-system comparisons reuse one shared workload, place a scannable compare surface early, and keep mechanism diagrams in-article rather than only on an external page.
 - [ ] Each recommended defense maps to a named failure condition and states its limits.
 - [ ] Website-specific claims are either sourced or explicitly framed as a generic pattern.
