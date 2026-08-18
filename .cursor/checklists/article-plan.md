@@ -28,6 +28,7 @@ The plan is not ready for approval until every applicable item is answered.
 - [ ] Concepts appear in dependency order.
 - [ ] The end-to-end causal chain identifies actors, actions or inputs, mechanisms or checks, and results.
 - [ ] The outline answers one reader question per section instead of using topic labels alone.
+- [ ] Scope / “本文不写什么” text earns its space for the target reader (or is cut); no leftover framing from a cancelled dual-track or companion that no longer helps.
 - [ ] When defenses or mitigations are recommended, each maps to the failure condition it addresses, with conditions and limits.
 - [ ] The main article owns a bounded question.
 - [ ] Optional depth is assigned to Toggles or companion posts without outsourcing definitions essential to the main article.

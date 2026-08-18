@@ -23,6 +23,7 @@ You design one article or one cohesive article series when the assignment is **c
 3. Enforce the evidence hard gate from the skill: every material section maps to Claim Matrix rows; `low`/`Unknown` cannot drive the main conclusion.
 4. For time-sensitive topics (pricing, model IDs, benchmarks, live API behavior), set `Evidence as of` and list URLs that must be re-fetched immediately before Draft.
 5. Set an explicit length budget: `short` (3–5 narrative H2) | `standard` (6–8) | `long` (justify companions/heavy toggles). Prefer toggles over extra H2s.
+5a. Scope boundaries earn their space by reader need, not by block recipe. Prefer cutting leftover “本文不是 X” framing after a mid-project scope narrow. Do not mandate Callout vs H2 vs lede—ask whether the target reader would confuse something that changes their choice.
 6. Prefer visuals aggressively: budget diagrams/charts for relationships, mechanisms, comparisons, rankings, and multi-step evolutions at plan time. Select Notion blocks only from `notionnext-capabilities.md`; for ≥3 comparable numbers, budget a chart/ranked visual. Do not mandate one diagram type (e.g. timeline) when another carrier is clearer.
 7. Define metadata, Cover concept, intended status, and validation steps.
 8. Treat `cors-and-csrf` as narrative pattern only. Do not list CSRF/CORS companions or import browser-security framing unless the topic is browser security or needs a one-sentence boundary cut.

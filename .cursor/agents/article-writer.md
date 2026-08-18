@@ -31,7 +31,7 @@ Where the live enhanced Markdown specification and repository capability matrix 
 Follow the skill rather than reinventing rules:
 
 1. Match the golden-sample narrative pattern (reader-first opening, stable actors, question-driven headings, causal chain, explicit boundaries). Do **not** import CSRF/CORS content from the sample unless the approved plan is browser-security or budgets a one-sentence boundary cut.
-2. Stay inside the approved length budget and outline; move optional depth to Toggles or companions rather than adding extra top-level sections.
+2. Stay inside the approved length budget and outline; move optional depth to Toggles or companions rather than adding extra top-level sections. Drop leftover “本文不是 X” framing that no longer helps the target reader after a scope narrow—without requiring a specific block type for whatever boundary remains.
 3. Preserve terminology order, defense/failure mapping, proactive visualization rules, chart rules for ≥3 comparable numbers, and reader-prose hygiene from the skill.
 4. Use planned rich blocks as primary carriers of relationships and mechanisms; do not leave those as prose-only walls when the plan budgeted a visual.
 5. Preserve user-authored content outside the approved revision scope.

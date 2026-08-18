@@ -93,9 +93,19 @@ Keep the heading outline narrative (NotionNext builds the site TOC from these he
 - Treat advanced variants as extensions unless they are the main question.
 - Do not place a Notion TOC block or outline image at the top; the site generates progress navigation automatically.
 
+### Scope boundaries: earn the space
+
+Judge by the target reader, not by block type.
+
+- A scope boundary (what the article leaves out) is worth space only if that reader would otherwise confuse two things **and** the confusion would change what they do.
+- If the audience already matches the article’s scope, keep the boundary short or omit it. Do not spend a full top-level section on “本文不是 X” when a sentence in the lede would do—or when silence is fine.
+- There is **no** required carrier: Callout, plain sentence, short aside, or (rarely) a full section are all allowed when the reader need justifies them. Do not invent a rule that “boundaries must be Callouts” or “boundaries must not be H2s.”
+- Setup that helps the reader start (scenario, actors, hard filters, shared workload) may open the article even when it is not yet the main answer.
+- When scope narrows mid-project, re-read the outline as a new reader would: delete leftover framing that only made sense under the old dual-track or companion plan. Keep what still earns its space.
+
 ## Causal narrative and defenses
 
-- Make every main heading answer one reader question rather than merely name a topic.
+- Make every main heading answer one reader question rather than merely name a topic. Prefer headings that move the decision or mechanism forward; author-process leftovers (“本文不写聊天套餐”) rarely do.
 - Keep an end-to-end causal chain visible: actor → action or input → mechanism/check → observable result. For browser-security flows, follow `./browser-security-terminology.md` (request / credentials / response readability / server acceptance).
 - Introduce each term before a later step relies on it. Do not make readers decode jargon while also learning the mechanism.
 - Map every recommended defense to the failure condition it prevents and state the conditions under which it works or fails.
@@ -313,6 +323,7 @@ If a reviewer says any of the following, apply the matching fix:
 | "谁能看清楚" / "网上不都是有很多图吗" | Under-visualized explanation, or numbers jammed into prose/cells | Prefer a diagram or ranked chart early; for ≥3 numbers use chart + one-number-per-cell table |
 | "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
 | "像规范摘要" / "像报告" / "本报告旨在" | Academic/report voice, missing scenario | Open with reader cost; cut report register; use question-driven headings |
+| "这段需要吗" / "用户需要类似的话吗" / "像在解释文章不写什么" | Scope or cancelled-track framing that does not earn its space for the target reader | Shorten or cut; keep only if confusion would change what the reader does; form is free (lede / aside / section)—do not prescribe Callout vs H2 |
 | "还没有交互页/对照页的号" / "不如图解页直观" | Comparison siloed, visuals outsourced, compare surface too late | Same shared workload; early compare table/chart; per-system diagram in-article; do not rely on an external show page |
 | "旧文的图更多 / 更直观" | Visual audit skipped during revision | Compare the old article's figures one by one; absorb, recreate, or deliberately drop each |
 | "这和已有那篇重复了" | Corpus overlap check skipped for a new article | Decide what the new article owns versus links to; refresh the existing article or narrow the new one's scope |
