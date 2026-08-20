@@ -84,6 +84,7 @@ Hard gate: no row → not writable in body. `low` / Unknown → not allowed in m
 ## Notion Design
 
 - Prefer visuals: Yes | No (if No, justify)
+- Visual-budget notes stay in this plan; do not echo 「主载体」 / 「比散文」 / format-choice asides into the draft.
 - Opening Callout:
 - Mermaid / code / equations:
 - Stage / evolution visuals (if applicable):

@@ -32,7 +32,7 @@ Work through `.cursor/checklists/article-review.md`. Report every concrete findi
 
 ### Narrative and style
 
-Use the skill's style rules and golden-sample pattern. Verify the reader can follow the main question, actors, terminology dependencies, and causal flow. Flag dense ≥3-item numeric dumps without a chart/ranked visual per the checklist. Flag workflow jargon, lone `<br>` spacers, arrow slogans, and `****` rich-text breakage as in the checklist. Flag scope or cancelled-track framing that does not earn its space for the target reader (usually `minor`; `major` only if it crowds out the useful start)—do not prescribe Callout vs H2.
+Use the skill's style rules and golden-sample pattern. Verify the reader can follow the main question, actors, terminology dependencies, and causal flow. Flag dense ≥3-item numeric dumps without a chart/ranked visual per the checklist. Flag workflow jargon, editorial-craft asides (「主载体」 / 「比散文」 / announcing a format choice), lone `<br>` spacers, arrow slogans, and `****` rich-text breakage as in the checklist. Flag scope or cancelled-track framing that does not earn its space for the target reader (usually `minor`; `major` only if it crowds out the useful start)—do not prescribe Callout vs H2.
 
 ## Severity
 

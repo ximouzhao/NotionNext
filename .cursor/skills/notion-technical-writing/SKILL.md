@@ -256,13 +256,17 @@ Readers assume protections are broader than they are. State the boundary explici
 
 ### 7a. Reader prose is not the editorial workflow
 
-The published body is for the site reader. Do **not** leak writing-process or NotionNext workflow words into Callouts, Toggles, link parentheticals, or source blurbs.
+The published body is for the site reader. Do **not** leak writing-process, NotionNext workflow, or editorial-craft decisions into Callouts, Toggles, link parentheticals, source blurbs, or ordinary paragraphs.
 
 Forbidden in reader-facing prose unless the article is explicitly about this site's publishing system:
 
 - `Draft` / `Invisible` / `Published` as page-status jargon
 - `companion` / `staging` / 「预览向」 / 「工作流闸门」
 - notes like 「该文当前为 Invisible companion」
+- planning/craft stage directions: `carrier` / 「主载体」 / 「散文」 / `prose-only` / 「比散文更省事」 / 「这里用表更清楚」 / 「先看主载体」
+- announcing a format choice ("下面用表格，比写八段更省事"; "plan 里预算了这张图")
+
+Put the table, diagram, or Toggle in place. If a lead-in is needed, state the **content** job ("八种策略差在谁有资格被删"), never the **presentation** job ("我决定用表因为散文更累"). Keep `carrier`, `prose`, and visual-budget notes in the plan and review notes only.
 
 Link related articles with a public `/article/<slug>` URL and, if needed, one reader-useful distinction (e.g. 「讲的是应用内二次确认，不是出站离开页」). Keep status and companion ownership in the plan, review notes, or metadata—not in the article body.
 
@@ -327,6 +331,7 @@ If a reviewer says any of the following, apply the matching fix:
 | "还没有交互页/对照页的号" / "不如图解页直观" | Comparison siloed, visuals outsourced, compare surface too late | Same shared workload; early compare table/chart; per-system diagram in-article; do not rely on an external show page |
 | "旧文的图更多 / 更直观" | Visual audit skipped during revision | Compare the old article's figures one by one; absorb, recreate, or deliberately drop each |
 | "这和已有那篇重复了" | Corpus overlap check skipped for a new article | Decide what the new article owns versus links to; refresh the existing article or narrow the new one's scope |
+| "读者不需要知道你为什么用表" / 「主载体」 / 「比散文」 / 「先看主载体」 | Editorial craft leaked into the body | Delete the aside; keep the visual; optional one-line **content** lead-in only |
 
 ## NotionNext publishing workflow
 
@@ -405,7 +410,7 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 - [ ] Heading hierarchy is question-driven and reads like a story, not an unstructured outline; NotionNext will derive the site TOC from it.
 - [ ] A concise causal conclusion appears before sources or deeper reading, which are not top-level narrative sections.
 - [ ] The page does not begin with `<table_of_contents/>`, a TOC screenshot, or a duplicate outline list.
-- [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」).
+- [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」) and no craft asides (「主载体」 / 「比散文」 / announcing why a table or diagram was chosen).
 - [ ] Callouts and Toggles have no lone `<br>` spacers that create large blank gaps.
 - [ ] Checklist and defense rows use plain actor + action wording, not author-coined arrow slogans such as `ID→URL`.
 - [ ] Main article and companion links use `https://ximouzhao.com/article/<slug>` and the intended NotionNext status.

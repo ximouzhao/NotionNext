@@ -47,7 +47,7 @@ This is the canonical criteria list for `article-reviewer`.
 - [ ] Sources and deeper reading do not interrupt the top-level narrative.
 - [ ] Companion pages may be short but remain locally understandable and do not outsource essential definitions.
 - [ ] Heading hierarchy forms a narrative and contains no duplicate manual TOC.
-- [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」); related-page notes state reader-useful distinctions only.
+- [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」) and no craft asides (「主载体」 / 「比散文」 / announcing why a table or diagram was chosen); related-page notes state reader-useful distinctions only.
 - [ ] Checklist and defense rows use plain actor + action wording, not author-coined arrow slogans such as `ID→URL`.
 
 Classify readability and structure findings by reader impact: use `major` when the target reader cannot follow the main question or mechanism, `minor` for localized clarity or flow defects, and `nit` for optional style preferences.
