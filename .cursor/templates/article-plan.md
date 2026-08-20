@@ -19,10 +19,10 @@ Use this template for `.tmp/article-plans/<timestamp>-<slug>.md`. Replace every 
 - Target reader:
 - Main question:
 - Reader outcome:
-- Scenario and actors:
+- Scenario and actors: (a recognizable failure plus who suffers it. Add a hostname only if origin or site is in the causal chain.)
 - In scope:
 - Out of scope:
-- Style anchor: https://ximouzhao.com/article/cors-and-csrf (narrative pattern only; do **not** import CSRF/CORS content unless this topic is browser security or needs a one-sentence boundary cut)
+- Style anchor: skill golden sample, narrative discipline only; do not import that sample’s topic or related-reading list unless this causal chain uses it
 
 ## Investigation Evidence
 

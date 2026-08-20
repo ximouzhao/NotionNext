@@ -2,7 +2,7 @@
 
 Use this appendix **only** when the article is about browser security, cookies, CORS, CSRF, clickjacking, or related web-platform controls.
 
-Do **not** open this appendix, copy its metaphors, or name CSRF/CORS/SOP/SameSite as contrast topics for unrelated work (NestJS, Redis, model selection, UA/download redirect, DDD, tooling, etc.). Adjacent articles that must cut a boundary may use one short sentence plus a public `/article/<slug>` link—nothing more.
+Do **not** open this appendix, copy its metaphors, or name its mechanisms as contrast topics unless this article’s causal chain uses them. A needed boundary cut is one short sentence plus a public `/article/<slug>` link.
 
 The golden sample `cors-and-csrf` teaches narrative discipline for all articles; it does **not** authorize CSRF content in every article.
 
@@ -32,6 +32,9 @@ Always separate:
 
 ## Example hygiene
 
-- Use reserved example domains such as `pay.example.com` and `evil.example`.
+This appendix is **not** a default example kit for the whole site. Use these hosts only in this appendix’s topic.
+
+- When the article needs a hostname, use reserved example domains such as `pay.example.com` and `evil.example`.
 - Never include real payment endpoints or claim a real provider uses a specific hidden field.
 - Label attack examples as demonstrations, not proof that every site is vulnerable.
+- Do not reuse these hosts on articles whose mechanism is not origin or site. If no hostname is needed, do not invent one.

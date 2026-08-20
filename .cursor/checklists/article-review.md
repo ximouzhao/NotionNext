@@ -35,7 +35,7 @@ This is the canonical criteria list for `article-reviewer`.
 - [ ] Specialized terms appear in dependency order before later sections rely on them.
 - [ ] The complete causal chain is traceable from actors and inputs through mechanisms or checks to observable results, or its absence is justified.
 - [ ] For browser-security flows, request sending, credential attachment, response readability, and server acceptance are separated where applicable.
-- [ ] Non-browser-security articles do not smuggle CSRF/CORS/SOP framing, metaphors, or default cors-and-csrf related reading; any boundary cut is at most one sentence + link.
+- [ ] Imported mechanisms, metaphors, hosts, or related links are used by this article’s causal chain; unused imports are absent. A needed boundary cut is at most one sentence + public link.
 - [ ] Main headings answer reader questions rather than merely label topics.
 - [ ] Scope or cancelled-track framing earns its space for the target reader; leftover “本文不是 X” that no longer helps is cut or shortened (carrier form is free).
 - [ ] Relationships, mechanisms, comparisons, rankings, and multi-step evolutions use planned visuals rather than prose-only walls (or the plan explicitly justifies prose-only).
@@ -48,7 +48,7 @@ This is the canonical criteria list for `article-reviewer`.
 - [ ] Companion pages may be short but remain locally understandable and do not outsource essential definitions.
 - [ ] Heading hierarchy forms a narrative and contains no duplicate manual TOC.
 - [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」) and no craft asides (「主载体」 / 「比散文」 / announcing why a table or diagram was chosen); related-page notes state reader-useful distinctions only.
-- [ ] Checklist and defense rows use plain actor + action wording, not author-coined arrow slogans such as `ID→URL`.
+- [ ] Checklist and defense rows use plain actor + action wording, not author-coined shorthand the reader must decode.
 
 Classify readability and structure findings by reader impact: use `major` when the target reader cannot follow the main question or mechanism, `minor` for localized clarity or flow defects, and `nit` for optional style preferences.
 

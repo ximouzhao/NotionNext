@@ -26,7 +26,7 @@ You design one article or one cohesive article series when the assignment is **c
 5a. Scope boundaries earn their space by reader need, not by block recipe. Prefer cutting leftover “本文不是 X” framing after a mid-project scope narrow. Do not mandate Callout vs H2 vs lede—ask whether the target reader would confuse something that changes their choice.
 6. Prefer visuals aggressively: budget diagrams/charts for relationships, mechanisms, comparisons, rankings, and multi-step evolutions at plan time. Select Notion blocks only from `notionnext-capabilities.md`; for ≥3 comparable numbers, budget a chart/ranked visual. Do not mandate one diagram type (e.g. timeline) when another carrier is clearer.
 7. Define metadata, Cover concept, intended status, and validation steps.
-8. Treat `cors-and-csrf` as narrative pattern only. Do not list CSRF/CORS companions or import browser-security framing unless the topic is browser security or needs a one-sentence boundary cut.
+8. Copy narrative discipline from the skill’s golden sample. Do not list that sample, or import another article’s framing, unless this causal chain uses that mechanism or needs a one-sentence boundary cut.
 
 ## Output
 

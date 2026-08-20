@@ -27,17 +27,20 @@ Primary **narrative** pattern to imitate (not the security topic):
 - What to copy: reader-first opening, stable actors, question-driven headings, end-to-end causal chain, explicit “does not do” boundaries, diagrams/tables that carry mechanism rather than decorate.
 - What **not** to copy: CSRF/CORS metaphors, Cookie/SOP framing, attack–defense evolution borrowed from that page, or default “link cors-and-csrf” padding. For comparisons or framework pieces, keep the same narrative discipline with a shared workload and early scannable surface.
 
-### CSRF / CORS mention hard rule
+### Import only what the causal chain uses
 
-`cors-and-csrf` is a style sample. It is **not** a required related article, background, or default contrast for every draft.
+The golden sample teaches **narrative discipline**. It is not a required related article, contrast topic, or metaphor kit.
 
-| Topic | CSRF / CORS / SOP / SameSite in body or plan |
-|---|---|
-| Browser security, cookies, CORS, CSRF, clickjacking, or related web-platform controls | Allowed; follow `./browser-security-terminology.md` |
-| Adjacent topic that must cut a boundary (e.g. leave-site confirm ≠ CSRF defense) | At most one short sentence + public `/article/<slug>` link; do not rewrite the CSRF/CORS article |
-| Unrelated (NestJS, Redis, model selection, UA/download redirect, DDD, tooling, etc.) | **Forbidden** in prose, Callouts, defense tables, metaphors, and “related reading” unless the user explicitly asks |
+- If this draft’s mechanism is the same class as an appendix (for example browser origin / cookie), follow that appendix.
+- If the reader would take the wrong action without a boundary, one short sentence plus a public `/article/<slug>` link is enough. Do not rewrite the other article.
+- Otherwise do not import another page’s topic, slogans, hosts, or “related reading.” Plans should not list the golden sample as a related page by default.
 
-Plans for unrelated topics must say `Style anchor: cors-and-csrf（叙事纪律 only）` and must **not** list CSRF companions as related pages by default.
+### Name only the setting the mechanism needs
+
+A concrete scenario is a failure the reader already feels, plus who acts. Do not invent scenery so the opening looks specific.
+
+- Add a hostname only if the taught mechanism depends on origin, site, cookie, or certificate identity. Then use a reserved example domain, never a real customer host.
+- If the mechanism does not depend on a host, do not invent one, and do not substitute a mascot shop, service brand, or series domain just to have a named place.
 
 ## Evidence hard gate
 
@@ -65,9 +68,7 @@ Do not grow the main article by stacking encyclopedia sections. Move optional de
 
 1. Start with one concrete scenario, question, or failure case. Carry the same actors through the article.
 2. Introduce concepts in dependency order: observable behavior → plain-language explanation → formal name → exact mechanism and boundaries.
-3. On first use, write the Chinese name, English full name, abbreviation, and a one-sentence explanation.
-   - Example: `依赖注入（Dependency Injection，DI）`
-   - Browser-security articles only: `CSRF（Cross-Site Request Forgery，跨站请求伪造）` — do not use CSRF as the default first-use example for unrelated topics.
+3. On first use, write the Chinese name, English full name, abbreviation, and a one-sentence explanation. Example shape: `中文名（English Full Name，缩写）`. Topic-specific first-use order belongs in that topic’s appendix, not here.
 4. Never rely on a definition from a distant section. A toggle, table row, or companion post must define the terms it uses.
 5. Replace vague claims with conditions. State who acts, what is checked, and when the behavior does or does not happen.
 6. Pass the evidence hard gate before any Notion write.
@@ -117,7 +118,7 @@ Judge by the target reader, not by block type.
 
 - Keep definitions local and ordered; do not make readers decode jargon while learning the mechanism.
 - Say what a mechanism does **not** do once the positive claim is clear.
-- For browser-security articles only, also follow `./browser-security-terminology.md`. Do not apply that appendix's CSRF/CORS framing to unrelated subjects (see **CSRF / CORS mention hard rule** above).
+- For browser-security articles only, also follow `./browser-security-terminology.md`. Do not apply that appendix to subjects whose causal chain does not use those mechanisms (see **Import only what the causal chain uses** above).
 
 ## Examples, figures, and sources
 
@@ -137,7 +138,7 @@ Still forbid decoration: every visual must have a named job in the plan (compari
 
 ### Figures and sources
 
-- Prefer reserved example domains (`pay.example.com`, `evil.example`, `api.example.com`) over real customer endpoints.
+- Follow **Name only the setting the mechanism needs**. Hosts belong in a figure only when the figure’s job is origin or site identity.
 - Explain each line of code that matters. Label examples as demonstrations when they are not universal proof.
 - Prefer simple diagrams that preserve one scenario and one action per step.
 - A new article that describes a process, multi-actor interaction, decision chain, evolution, or comparison should include at least one diagram or chart by default—not as decoration, but as a planned carrier of the explanation. If such a draft has no visual, the plan must justify why.
@@ -176,9 +177,10 @@ Abstract mechanisms are easier to accept when the reader watches them solve a co
 
 **Scenario story (all articles):** Place the reader inside a specific situation with named actors, a visible action, and a consequence. Do not describe the mechanism first and illustrate it later; let the mechanism emerge from the story.
 
-- Security: "你登录了 pay.example.com，另一个标签页里的 evil.example 悄悄发出一笔付款"
+- When origin matters: a logged-in site and another page that triggers a request the user did not mean
 - Performance: "用户点开列表页，接口返回 2MB JSON，前端渲染 4000 个节点，白屏 3 秒"
 - Refactoring: "运营要加一个导出按钮，你发现这段 800 行的函数里已经塞了 6 个不相关的功能"
+- Review / smell catalog: "评审单同一列写着 TOCTOU race 和 Compliance theater，你认得坏味道这个词，却没法把标签翻译成一次失败"
 
 **Evolution / attack-defense progression (when the topic has history or opposition):** Show how the solution evolved under pressure. Each step should answer: what new requirement or attack appeared, why the old approach broke, and what the next iteration changed. Prefer a visual stage map for the arc (timeline, LR flowchart, or short stage table—whichever is clearest); do not leave a multi-step evolution as prose-only by default.
 
@@ -196,6 +198,7 @@ Pick who the article is about and stay with them.
 
 - If it is the reader, use "你" or "你的系统" in headings, quotes, and the recap.
 - If it is a team or a service, name them once and keep referring to them.
+- Decorative setting is not a protagonist. Stay with whoever suffers the failure.
 - Do not switch to the attacker, the framework, the spec, or the database halfway through unless the article is explicitly about their internals.
 
 **Test:** read every pull quote and heading aloud. If the subject changes from "you" to "the attacker" or "the GC", the perspective has drifted.
@@ -204,19 +207,9 @@ Pick who the article is about and stay with them.
 
 Do not write slogans that only make sense after the reader already understands the mechanism.
 
-| Compressed | Expanded |
-|---|---|
-| "读不到 ≠ 做不到" | "浏览器拦住了脚本看到结果，却没拦住服务器执行付款" |
-| "拦看不拦发" | "浏览器不阻止表单发出去，只阻止脚本读响应" |
-
-The problem is not technical terms themselves—"最终一致性" and "无状态服务" are fine because they are established industry terms. The problem is **author-coined shorthand** that compresses a causal claim into a slogan. If you invented the phrase for this article, expand it into actor + action + result.
+The problem is not established industry terms. The problem is **author-coined shorthand** that compresses a causal claim into a slogan. If you invented the phrase for this article, expand it into actor + action + result.
 
 This also applies to checklist rows, defense tables, and arrow slogans. Prefer plain actor + action wording over compact notation the reader must decode.
-
-| Compressed | Expanded |
-|---|---|
-| "改成 ID→URL" | "改成只传 ID，由后台查表转成 URL" |
-| "服务端 ID 映射" | "前端只传短标识，服务端用内部表查出完整地址再跳" |
 
 If a sentence needs more than two technical terms, split it or move the precise definition to a toggle.
 
@@ -224,23 +217,21 @@ If a sentence needs more than two technical terms, split it or move the precise 
 
 A metaphor helps a reader enter a concept. It becomes a liability when it is stretched, mixed, or left standing after the real mechanism has been named.
 
-- **Use a metaphor only when the reader has no existing mental hook.** If the reader already knows what a session token is, do not call it a "门禁卡".
-- **One metaphor per concept, and do not mix metaphors in the same paragraph.** If Cookie is a "门禁卡", do not also call it "凭证" or "票据" nearby.
-- **Drop the metaphor as soon as the formal name and mechanism are established.** Continuing to say "刷卡" after defining `SameSite` forces the reader to translate twice.
-- **Do not extend the metaphor beyond its useful range.** "刷卡" is fine; "卡号被复制" starts to mislead because CSRF does not copy the Cookie value.
+- **Use a metaphor only when the reader has no existing mental hook.** If the formal name is already familiar, skip the analogy.
+- **One metaphor per concept, and do not mix metaphors in the same paragraph.**
+- **Drop the metaphor as soon as the formal name and mechanism are established.**
+- **Do not extend the metaphor beyond its useful range.** A stretched analogy starts to teach the wrong mechanism.
 - **Prefer no metaphor over a strained one.** If the plain mechanism name is clearer than any analogy, skip the analogy.
 
 The goal is not to eliminate metaphors, but to make sure each one earns its place and then gets out of the way.
 
 ### 6. Say what a mechanism does NOT do
 
-Readers assume protections are broader than they are. State the boundary explicitly.
+Readers assume protections are broader than they are. After the positive claim, state the boundary in **this topic’s** terms: who is not covered, what is not guaranteed, when it fails.
 
-- SOP does not stop requests; it stops scripts from reading responses.
-- CORS does not authenticate users; it lets servers declare which origins may read responses.
-- `HttpOnly` does not stop the browser from sending the Cookie; it stops scripts from reading it.
-- A cache does not guarantee freshness; it guarantees a faster answer within a TTL.
-- When the topic is an attack, describe the attacker's full capability boundary—what they cannot read, cannot see, and cannot control—not just the slice one mechanism blocks. Otherwise readers infer the attacker's goal from the mechanism's scope (e.g., reading "SOP blocks response reading" as "the attacker was trying to read the response").
+When the topic is an attack, describe the attacker’s full capability boundary—what they cannot read, cannot see, and cannot control—not just the slice one mechanism blocks. Otherwise readers infer the goal from the mechanism’s scope.
+
+Browser-security boundaries live in `./browser-security-terminology.md`, not as the default examples for every article.
 
 ### 7. Match the block to the job
 
@@ -322,7 +313,8 @@ If a reviewer says any of the following, apply the matching fix:
 | "为什么要关心攻击者" | Perspective drift to attacker | Reframe around reader's stake |
 | "为什么要关心框架内部" | Perspective drift to mechanism | Show what breaks or slows down for the reader |
 | "这里不要提 X" | Mixed metaphor or unnecessary jargon | Remove metaphor, use plain mechanism name |
-| "为什么又提 CSRF" / "无关文串 CSRF" | Style-sample contamination from cors-and-csrf | Delete CSRF/CORS framing; keep narrative discipline only; boundary cut = one sentence + link max |
+| "为什么又提 X" / "无关文串 X" | Imported topic, metaphor, or related link this causal chain does not use | Drop the import; keep the narrative method; boundary cut = one sentence + link max |
+| "非得有这个网站吗" / "这个设定用得上吗" | Opening scenery the mechanism does not need | Delete the unused token; keep the failure and the actors who suffer it |
 | "全是话" | Prose carrying a relationship that needs a visual | Add diagram/chart/table that owns the mechanism or comparison; cut the duplicated prose |
 | "谁能看清楚" / "网上不都是有很多图吗" | Under-visualized explanation, or numbers jammed into prose/cells | Prefer a diagram or ranked chart early; for ≥3 numbers use chart + one-number-per-cell table |
 | "详见 xxx" | Cross-reference instead of local definition | Define locally or move detail to a toggle |
@@ -346,7 +338,7 @@ If a reviewer says any of the following, apply the matching fix:
    - a hand-written bullet list that only restates upcoming headings
    Start the body with the opening scenario / callout, then the first real section heading.
 7. For companion pages, create separate database `Post` rows with a stable `slug` and `status=Invisible`. A companion may have narrow scope, but it must remain locally understandable and must not own a definition essential to the main article unless the main article already established it.
-8. Link companion pages with the public site route `https://ximouzhao.com/article/<slug>` (for example `https://ximouzhao.com/article/cors-and-csrf`). Never use `https://blog.ximouzhao.com/...` (origin-only host), bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
+8. Link companion pages with the public site route `https://ximouzhao.com/article/<slug>`. Never use `https://blog.ximouzhao.com/...` (origin-only host), bare `https://ximouzhao.com/<slug>`, Notion page URLs, or omit the `/article/` prefix. Do not use native Notion child pages as the site hierarchy.
 9. After writing, confirm the Claim Matrix still covers every material body claim, clear independent `article-reviewer` findings (including evidence spot-check), then run `verify-notion-article` for mechanical and public-render checks. Notion UI correctness does not prove NotionNext rendering; verify does not replace editorial review.
 10. Treat `Draft`, `Invisible`, and the site's article password as workflow/UI controls, not confidentiality boundaries. Never store confidential material in this site database.
 11. Use `Invisible` only after explicit approval for public-site preview.
@@ -396,7 +388,8 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 ## Pre-publication review
 
 - [ ] The first screen explains why the reader should care and follows the golden-sample narrative pattern.
-- [ ] Unrelated topics do not import CSRF/CORS/SOP framing, metaphors, or default cors-and-csrf “related reading”; boundary cuts stay one sentence + link.
+- [ ] Body, Callouts, and related links only include another article’s topic when this causal chain uses that mechanism; unused imports are gone.
+- [ ] A hostname appears only if the mechanism depends on origin, site, cookie, or certificate identity.
 - [ ] Claim Matrix covers every material body claim; evidence was spot-checked; `low`/`Unknown` items are out of the main conclusion.
 - [ ] Time-sensitive facts show a current `Evidence as of` / recheck date.
 - [ ] The draft stays inside the planned length budget.
@@ -412,7 +405,7 @@ Notion covers are wide banners. Do not ship raw tall 16:9 crops that look cut of
 - [ ] The page does not begin with `<table_of_contents/>`, a TOC screenshot, or a duplicate outline list.
 - [ ] Reader-facing prose has no editorial workflow jargon (`Draft` / `Invisible` / `companion` / `staging` / 「预览向」) and no craft asides (「主载体」 / 「比散文」 / announcing why a table or diagram was chosen).
 - [ ] Callouts and Toggles have no lone `<br>` spacers that create large blank gaps.
-- [ ] Checklist and defense rows use plain actor + action wording, not author-coined arrow slogans such as `ID→URL`.
+- [ ] Checklist and defense rows use plain actor + action wording, not author-coined shorthand the reader must decode.
 - [ ] Main article and companion links use `https://ximouzhao.com/article/<slug>` and the intended NotionNext status.
 - [ ] Independent review has no blocker or major findings.
 - [ ] Invisible preview and Published status changes have the required separate user approvals.
